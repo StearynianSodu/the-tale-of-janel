@@ -9,7 +9,7 @@ import LevelChoice from "./scenes/LevelChoice";
 const config: Phaser.Types.Core.GameConfig = {
     type: Phaser.AUTO,
     width: 768,
-    height: 900,
+    height: 960,
     physics: {
         default: 'matter',
         matter:{
@@ -17,6 +17,7 @@ const config: Phaser.Types.Core.GameConfig = {
             gravity: {x: 0, y: 1.5}
         }
     },
+    backgroundColor: '#2f3e46',
     scene: [MainMenu,LevelChoice,Game,UI]
 }
 

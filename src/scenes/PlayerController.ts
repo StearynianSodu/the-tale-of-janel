@@ -1,6 +1,7 @@
 import Phaser from "phaser";
 import StateMachine from "../stateMachine/StateMachine";
 import {sharedInstance as events} from "./EventCentre";
+import ObstaclesController from "./ObstaclesController";
 
 type InputKeys = {
     up: Phaser.Input.Keyboard.Key, 
@@ -21,11 +22,15 @@ export default class PlayerController{
     private health = 100;
     private butter = 0;
     private cheese = 0;
+    private obstacles;
+    private scene;
 
 
-    constructor(sprite: Phaser.Physics.Matter.Sprite, keys: InputKeys){
+    constructor(sprite: Phaser.Physics.Matter.Sprite, keys: InputKeys, obstacles: ObstaclesController, scene: Phaser.Scene){
         this.sprite = sprite;
         this.keys = keys;
+        this.obstacles = obstacles;
+        this.scene = scene;
 
         this.createAnimations();
 
@@ -250,6 +255,76 @@ export default class PlayerController{
                     this.stateMachine.setState('idle');
                 }
             }
+        })
+        .addState('spike-hit',{
+            onEnter: ()=>{
+                this.sprite.play('player-jump');
+
+                this.sprite.setVelocityY(-8);
+
+
+                const startColor = Phaser.Display.Color.ValueToColor(0xffffff);
+                const endColor = Phaser.Display.Color.ValueToColor(0xff0000);
+                this.scene.tweens.addCounter({
+                    from: 0,
+                    to: 100,
+                    duration: 100,
+                    repeat: 2,
+                    yoyo: true,
+                    ease: Phaser.Math.Easing.Sine.InOut,
+                    onUpdate: tween =>{
+                        const value = tween.getValue()
+                        const colorObject = Phaser.Display.Color.Interpolate.ColorWithColor(
+                            startColor,
+                            endColor,
+                            100,
+                            value
+                        );
+
+                        const color = Phaser.Display.Color.GetColor(
+                            colorObject.r,
+                            colorObject.g,
+                            colorObject.b
+                        )
+
+                        this.sprite.setTint(color);
+                    }
+
+                })
+            },
+            onUpdate: ()=>{
+                if(this.sprite.body.velocity.y>0.1){
+                    this.stateMachine.setState('fall');
+                }
+
+                if(Phaser.Input.Keyboard.JustDown(this.keys.up)&&!this.doubleJumped){
+                    this.stateMachine.setState('double-jump');
+                }
+
+                if(this.keys.down.isDown){
+                    this.stateMachine.setState('smash');
+                }
+
+                if(this.keys.tertiary.isDown){
+                    this.stateMachine.setState('dash');
+                }
+
+                if(this.keys.left.isDown){
+                    this.sprite.setVelocityX(this.sprite.body.velocity.x -0.5)
+                    if(this.sprite.body.velocity.x <= -5){
+                        this.sprite.setVelocityX(-5);
+                    }
+                    this.sprite.flipX = true;
+                }else if(this.keys.right.isDown){
+                    this.sprite.setVelocityX(this.sprite.body.velocity.x +0.5)
+                    if(this.sprite.body.velocity.x >= 5){
+                        this.sprite.setVelocityX(5);
+                    }
+                    this.sprite.flipX = false;
+                }else{
+                    this.sprite.setVelocityX(0);
+                }
+            }
         });
 
         this.stateMachine.setState('idle');
@@ -257,6 +332,14 @@ export default class PlayerController{
         this.sprite.setOnCollide((data: MatterJS.ICollisionPair)=>{
             const bodyA = data.bodyA as MatterJS.BodyType;
             const gameObjectA = bodyA.gameObject;
+            const bodyB = data.bodyB as MatterJS.BodyType;
+            const gameObjectB = bodyB.gameObject;
+
+            if(this.obstacles.is('spike',bodyB)){
+                this.health = Phaser.Math.Clamp(this.health - 5, 0, 100);
+                events.emit('health-changed', this.health);
+                this.stateMachine.setState('spike-hit');
+            }
 
             if(!gameObjectA){
                 return;
@@ -269,8 +352,6 @@ export default class PlayerController{
 				return;
             }
 
-            const bodyB = data.bodyB as MatterJS.BodyType;
-            const gameObjectB = bodyB.gameObject;
 
             if(gameObjectB instanceof Phaser.Physics.Matter.Sprite){
                 const sprite = gameObjectB as Phaser.Physics.Matter.Sprite;
@@ -282,8 +363,6 @@ export default class PlayerController{
                         console.log("Collided with star");
                         events.emit('star-collected');
                         sprite.destroy();
-                        break;
-                    case 'spikes':
                         break;
                     case 'butter':
                         this.butter = Phaser.Math.Clamp(this.butter+1,0,4);

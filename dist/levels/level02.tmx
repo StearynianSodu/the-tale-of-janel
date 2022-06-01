@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="24" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="7">
- <tileset firstgid="1" name="ForestTilesetNew" tilewidth="32" tileheight="32" tilecount="75" columns="15">
-  <image source="../assets/ForestTilesetNew.png" width="480" height="160"/>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="24" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="16">
+ <tileset firstgid="1" name="ForestTilesetNew" tilewidth="32" tileheight="32" tilecount="85" columns="17">
+  <image source="../assets/ForestTilesetNew.png" width="544" height="160"/>
   <tile id="0">
    <properties>
     <property name="collides" type="bool" value="true"/>
@@ -77,16 +77,6 @@
     <property name="collides" type="bool" value="true"/>
    </properties>
   </tile>
-  <tile id="15">
-   <properties>
-    <property name="collides" type="bool" value="true"/>
-   </properties>
-  </tile>
-  <tile id="16">
-   <properties>
-    <property name="collides" type="bool" value="true"/>
-   </properties>
-  </tile>
   <tile id="17">
    <properties>
     <property name="collides" type="bool" value="true"/>
@@ -149,7 +139,7 @@
   </tile>
   <tile id="29">
    <properties>
-    <property name="collides" type="bool" value="false"/>
+    <property name="collides" type="bool" value="true"/>
    </properties>
   </tile>
   <tile id="30">
@@ -159,17 +149,7 @@
   </tile>
   <tile id="31">
    <properties>
-    <property name="collides" type="bool" value="true"/>
-   </properties>
-  </tile>
-  <tile id="32">
-   <properties>
-    <property name="collides" type="bool" value="true"/>
-   </properties>
-  </tile>
-  <tile id="33">
-   <properties>
-    <property name="collides" type="bool" value="true"/>
+    <property name="collides" type="bool" value="false"/>
    </properties>
   </tile>
   <tile id="34">
@@ -224,7 +204,7 @@
   </tile>
   <tile id="44">
    <properties>
-    <property name="collides" type="bool" value="false"/>
+    <property name="collides" type="bool" value="true"/>
    </properties>
   </tile>
   <tile id="45">
@@ -244,17 +224,7 @@
   </tile>
   <tile id="48">
    <properties>
-    <property name="collides" type="bool" value="true"/>
-   </properties>
-  </tile>
-  <tile id="49">
-   <properties>
-    <property name="collides" type="bool" value="true"/>
-   </properties>
-  </tile>
-  <tile id="50">
-   <properties>
-    <property name="collides" type="bool" value="true"/>
+    <property name="collides" type="bool" value="false"/>
    </properties>
   </tile>
   <tile id="51">
@@ -332,16 +302,6 @@
     <property name="collides" type="bool" value="true"/>
    </properties>
   </tile>
-  <tile id="66">
-   <properties>
-    <property name="collides" type="bool" value="true"/>
-   </properties>
-  </tile>
-  <tile id="67">
-   <properties>
-    <property name="collides" type="bool" value="true"/>
-   </properties>
-  </tile>
   <tile id="68">
    <properties>
     <property name="collides" type="bool" value="true"/>
@@ -377,33 +337,73 @@
     <property name="collides" type="bool" value="true"/>
    </properties>
   </tile>
+  <tile id="75">
+   <properties>
+    <property name="collides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="76">
+   <properties>
+    <property name="collides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="77">
+   <properties>
+    <property name="collides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="78">
+   <properties>
+    <property name="collides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="79">
+   <properties>
+    <property name="collides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="80">
+   <properties>
+    <property name="collides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="81">
+   <properties>
+    <property name="collides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="82">
+   <properties>
+    <property name="collides" type="bool" value="true"/>
+   </properties>
+  </tile>
  </tileset>
  <layer id="1" name="ground" width="24" height="24">
   <data encoding="csv">
-17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,
-17,5,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,40,6,17,
-17,26,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,17,
-17,26,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,17,
-17,26,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,17,
-17,26,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,17,
-17,26,0,0,0,0,0,0,0,0,45,45,45,30,45,30,30,45,30,45,0,0,24,17,
-17,26,0,0,0,0,0,0,0,0,54,55,66,70,70,70,70,70,65,56,0,0,24,17,
-17,26,0,0,0,0,0,0,0,0,0,0,39,40,40,6,25,5,41,0,0,0,24,17,
-17,26,0,0,0,0,0,0,0,0,0,0,0,0,0,24,5,41,0,0,0,0,24,17,
-17,26,0,0,0,0,0,0,0,0,0,0,0,0,0,39,41,0,0,0,0,0,24,17,
-17,26,30,45,45,30,30,45,30,45,0,0,0,0,0,0,0,0,0,0,0,0,24,17,
-17,59,70,70,70,70,70,70,65,56,0,0,0,0,0,0,0,0,0,0,0,0,24,17,
-17,25,25,25,25,25,25,25,41,0,0,0,0,0,0,0,0,0,0,0,0,0,24,17,
-17,25,25,25,25,5,40,41,0,0,0,0,0,0,0,0,0,0,0,0,0,0,24,17,
-17,25,25,5,40,41,0,0,0,0,0,0,0,30,45,30,45,45,30,30,45,45,24,17,
-17,25,5,41,0,0,0,0,0,0,0,0,0,54,66,70,70,70,70,70,70,70,60,17,
-17,5,41,0,0,0,0,0,0,0,0,0,0,0,39,6,25,25,25,25,25,25,25,17,
-17,26,0,0,0,0,0,0,0,0,0,0,0,0,0,24,25,25,25,25,25,25,25,17,
-17,26,0,0,0,0,0,9,10,11,0,0,0,0,0,39,6,25,25,25,25,25,25,17,
-17,26,0,0,0,0,9,21,25,20,11,0,0,0,0,0,24,25,25,25,25,25,25,17,
-17,26,0,0,0,0,24,25,25,25,26,0,0,0,0,0,24,25,25,25,25,25,25,17,
-17,20,10,10,10,10,21,25,25,25,20,10,10,10,10,10,21,25,25,25,25,25,25,17,
-17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17
+16,47,47,47,47,47,47,47,47,47,47,47,47,47,47,47,47,47,47,47,47,47,47,17,
+31,5,44,44,44,44,44,44,44,44,44,44,44,44,44,44,44,44,44,44,44,44,6,29,
+31,28,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,26,29,
+31,28,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,26,29,
+31,28,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,26,29,
+31,28,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,26,29,
+31,28,0,0,0,0,0,0,0,0,49,49,49,32,49,32,32,49,32,49,0,0,26,29,
+31,28,0,0,0,0,0,0,0,0,60,61,74,78,78,78,78,78,73,62,0,0,26,29,
+31,28,0,0,0,0,0,0,0,0,0,0,43,44,44,6,27,5,45,0,0,0,26,29,
+31,28,0,0,0,0,0,0,0,0,0,0,0,0,0,26,5,45,0,0,0,0,26,29,
+31,28,50,0,0,0,0,0,0,0,0,0,0,0,0,43,45,0,0,0,0,0,26,29,
+31,28,67,85,49,32,84,49,32,49,0,0,0,0,0,0,0,0,0,0,0,0,26,29,
+31,65,78,78,78,78,78,78,73,62,0,0,0,0,0,0,0,0,0,0,0,0,26,29,
+33,13,13,13,14,27,27,27,45,0,0,0,0,0,0,0,0,0,0,0,0,0,26,29,
+30,30,16,47,48,5,44,45,0,0,0,0,0,0,0,0,0,0,0,0,50,51,26,29,
+30,16,48,5,44,45,0,0,0,0,0,0,0,32,49,32,49,49,32,85,67,68,26,29,
+16,48,5,45,0,0,0,0,0,0,0,0,0,60,74,78,78,78,78,78,78,78,66,29,
+31,5,45,0,0,0,0,0,0,0,0,0,0,0,43,6,12,13,13,13,13,13,13,34,
+31,28,0,0,0,0,0,0,0,0,0,0,0,0,0,26,46,17,30,30,30,30,30,19,
+31,28,0,0,0,0,0,9,10,11,0,0,0,0,0,43,6,29,30,30,30,30,30,19,
+31,28,0,0,0,0,9,23,27,22,11,51,0,0,0,50,26,29,30,30,30,30,30,19,
+31,28,0,0,0,0,26,12,13,14,28,68,85,84,84,67,26,29,30,30,30,30,30,19,
+31,22,10,10,10,10,23,29,30,31,22,10,10,10,10,10,23,29,30,30,30,30,30,19,
+33,13,13,13,13,13,13,34,19,33,13,13,13,13,13,13,13,34,19,19,19,19,19,19
 </data>
  </layer>
  <objectgroup id="2" name="objects">
@@ -413,5 +413,16 @@
   <object id="4" name="star" x="478.667" y="144"/>
   <object id="5" name="star" x="138.667" y="162.667"/>
   <object id="6" name="star" x="670.667" y="273.333"/>
+ </objectgroup>
+ <objectgroup id="3" name="obstacles">
+  <object id="7" x="66" y="323" width="27" height="60.5"/>
+  <object id="8" x="97.5" y="353.5" width="28.5" height="30"/>
+  <object id="9" x="192" y="355.5" width="31" height="28"/>
+  <object id="10" x="354.5" y="645" width="27.5" height="58.5"/>
+  <object id="11" x="481.5" y="642.5" width="29" height="60.5"/>
+  <object id="12" x="385" y="674" width="94" height="29"/>
+  <object id="13" x="641.5" y="450.5" width="29.5" height="60.5"/>
+  <object id="14" x="674.5" y="452" width="27" height="59.5"/>
+  <object id="15" x="610" y="482.5" width="27.5" height="29"/>
  </objectgroup>
 </map>

@@ -3,7 +3,7 @@ import Phaser from "phaser";
 
 export default class LevelChoice extends Phaser.Scene{
     private keys;
-    private levelCount = 3;
+    private levelCount = 2;
     private currentLevel = 1;
     private levelLabel;
     constructor(){
@@ -39,8 +39,10 @@ export default class LevelChoice extends Phaser.Scene{
             this.levelLabel.text = `${this.currentLevel}`
         }
         if(Phaser.Input.Keyboard.JustDown(this.keys.space)){
-            this.scene.start('game');
+            this.scene.start('game',{level: this.currentLevel});
         }
     }
+
+
 
 }
