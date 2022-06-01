@@ -29,10 +29,15 @@ export default class UI extends Phaser.Scene{
         });
     }
 
+    preload(){
+        this.load.image('ui-bg','assets/UIBackground.png');
+    }
+
     create(){
+        this.add.image(0,0,'ui-bg').setOrigin(0,0);
         this.graphics = this.add.graphics();
 
-        this.starsLabel = this.add.text(32,870, `Stars: ${this.starsCount}`,{
+        this.starsLabel = this.add.text(64,870, `Stars: ${this.starsCount}`,{
             fontSize: '16px'
         });
 
@@ -85,28 +90,28 @@ export default class UI extends Phaser.Scene{
         const percent = Phaser.Math.Clamp(value/100,0,100);
 
         this.graphics.fillStyle(0x808080);
-        this.graphics.fillRect(32,810, width, 16);
+        this.graphics.fillRect(64,810, width, 16);
 
         this.graphics.fillStyle(0xff0000);
-        this.graphics.fillRect(32,810,percent*width,16);
+        this.graphics.fillRect(64,810,percent*width,16);
     }
 
     private setButterBar(value:number){
         const width = 200
         this.graphics.fillStyle(0x808080);
-        this.graphics.fillRect(32,832,width,12);
+        this.graphics.fillRect(64,832,width,12);
 
         this.graphics.fillStyle(0xf6e2b9);
-        this.graphics.fillRect(32,832,(value/4)*width,12); 
+        this.graphics.fillRect(64,832,(value/4)*width,12); 
     }
 
     private setCheeseBar(value: number){
         const width = 200
         this.graphics.fillStyle(0x808080);
-        this.graphics.fillRect(32,848,width,12);
+        this.graphics.fillRect(64,848,width,12);
 
         this.graphics.fillStyle(0xffa600);
-        this.graphics.fillRect(32,848,(value/4)*width,12);
+        this.graphics.fillRect(64,848,(value/4)*width,12);
     }
 
     private handleHealthChanged(value:number){

@@ -43,8 +43,8 @@ export default class Game extends Phaser.Scene{
         this.load.atlas('janel', 'assets/janel-tmp.png','assets/janel-tmp.json');
         this.load.image('star', 'assets/Star.png');
         //this.load.image('bg', 'assets/Background.png');
-        this.load.image('cheese','assets/cheese.png');
-        this.load.image('butter','assets/butter.png');
+        this.load.image('cheese','assets/Cheese.png');
+        this.load.image('butter','assets/Butter.png');
     }
 
     create(){
