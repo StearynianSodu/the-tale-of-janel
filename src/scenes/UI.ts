@@ -50,8 +50,12 @@ export default class UI extends Phaser.Scene{
         events.on('cheese-changed', this.handleCheeseChanged, this);
         events.on('health-changed', this.handleHealthChanged, this);
 
-        this.events.once(Phaser.Scenes.Events.DESTROY, ()=>{
-            events.off('star-collected', this.handleStarCollected, this)
+        this.events.once(Phaser.Scenes.Events.SHUTDOWN, ()=>{
+            events.off('star-collected', this.handleStarCollected, this);
+            events.off('star-collected', this.handleStarCollected, this);
+            events.off('butter-changed', this.handleButterChanged, this);
+            events.off('cheese-changed', this.handleCheeseChanged, this);
+            events.off('health-changed', this.handleHealthChanged, this);
         })
 
         this.veil = this.add.graphics({x:0,y:0});

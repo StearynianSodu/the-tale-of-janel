@@ -20,6 +20,10 @@ export default class Game extends Phaser.Scene{
     }
 
     init(d: {level: number}){
+        this.events.once(Phaser.Scenes.Events.SHUTDOWN, ()=>{
+            this.destroy();
+        })
+
         this.keys = this.input.keyboard.addKeys({
             up: Phaser.Input.Keyboard.KeyCodes.UP, 
             down: Phaser.Input.Keyboard.KeyCodes.DOWN, 
@@ -90,6 +94,11 @@ export default class Game extends Phaser.Scene{
 
         this.playerController = new PlayerController(this.player, this.keys, this.obstacles, this);
 
+    }
+
+    destroy(){
+        this.scene.stop('ui');
+        this.enemies.forEach(enemy => enemy.destroy()); 
     }
 
     update(t: number, dt: number){
@@ -171,7 +180,7 @@ export default class Game extends Phaser.Scene{
                 case 'enemySpawn':
                     const enemy = this.matter.add.sprite(x,y,'enemy').setFixedRotation();
                     enemy.setFriction(0);
-                    this.enemies.push(new EnemyController(enemy));
+                    this.enemies.push(new EnemyController(enemy,this));
                     this.obstacles.add('enemy',enemy.body as MatterJS.BodyType);
                     break;
             } 

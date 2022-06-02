@@ -25,6 +25,8 @@ export default class PlayerController{
     private obstacles;
     private scene;
 
+    private lastEnemy?: Phaser.Physics.Matter.Sprite;
+
 
     constructor(sprite: Phaser.Physics.Matter.Sprite, keys: InputKeys, obstacles: ObstaclesController, scene: Phaser.Scene){
         this.sprite = sprite;
@@ -288,8 +290,9 @@ export default class PlayerController{
 
                         this.sprite.setTint(color);
                     }
-
                 })
+
+                this.setHealth(this.health-10);
             },
             onUpdate: ()=>{
                 if(this.sprite.body.velocity.y>0.1){
@@ -345,8 +348,10 @@ export default class PlayerController{
 
                         this.sprite.setTint(color);
                     }
-
                 })
+
+                this.setHealth(this.health-10);
+                
             },
             onUpdate: ()=>{
                 if(this.sprite.body.velocity.y>0.1){
@@ -373,29 +378,77 @@ export default class PlayerController{
                     this.stateMachine.setState('idle');
                 }
             }
+        })
+        .addState('primary',{
+
+        })
+        .addState('special',{
+
+        })
+        .addState('enemy-damaged',{
+            onEnter:()=>{
+                events.emit('enemy-damaged',this.lastEnemy);
+            },
+            onUpdate: ()=>{
+                if(this.sprite.body.velocity.y>0.1){
+                    this.stateMachine.setState('fall');
+                }
+
+                if(Phaser.Input.Keyboard.JustDown(this.keys.up)&&!this.doubleJumped){
+                    this.stateMachine.setState('double-jump');
+                }
+
+                if(this.keys.down.isDown){
+                    this.stateMachine.setState('smash');
+                }
+
+                if(this.keys.tertiary.isDown){
+                    this.stateMachine.setState('dash');
+                }
+
+                if(this.keys.left.isDown){
+                    this.stateMachine.setState('run');
+                }else if(this.keys.right.isDown){
+                    this.stateMachine.setState('run');
+                }else{
+                    this.stateMachine.setState('idle');
+                }
+            }
+        })
+        .addState('dead',{
+            onEnter: ()=>{
+                this.sprite.anims.play('player-death');
+                this.sprite.setOnCollide(()=>{});
+
+                this.scene.time.delayedCall(1000,()=>{
+                    this.scene.scene.start('gameover');
+                })
+            }
         });
 
         this.stateMachine.setState('idle');
 
         this.sprite.setOnCollide((data: MatterJS.ICollisionPair)=>{
+            if(this.stateMachine.isCurrentState('dead')){
+                return;
+            }
             const bodyA = data.bodyA as MatterJS.BodyType;
             const gameObjectA = bodyA.gameObject;
             const bodyB = data.bodyB as MatterJS.BodyType;
             const gameObjectB = bodyB.gameObject;
 
             if(this.obstacles.is('spike',bodyB)){
-                this.health = Phaser.Math.Clamp(this.health - 10, 0, 100);
-                events.emit('health-changed', this.health);
                 this.stateMachine.setState('spike-hit');
-                this.scene.sound.play(`hurt${Math.floor(Math.random()*3)+1}`);
                 return;
             }
 
             if(this.obstacles.is('enemy',bodyB)){
-                this.health = Phaser.Math.Clamp(this.health - 10, 0, 100);
-                events.emit('health-changed', this.health);
+                this.lastEnemy = bodyB.gameObject;
+                if(this.stateMachine.isCurrentState('dash')||this.stateMachine.isCurrentState('smash')){
+                    this.stateMachine.setState('enemy-damaged');
+                    return;
+                }
                 this.stateMachine.setState('enemy-hit');
-                this.scene.sound.play(`hurt${Math.floor(Math.random()*3)+1}`);
                 return;
             }
 
@@ -442,6 +495,17 @@ export default class PlayerController{
 
     update(dt: number){
         this.stateMachine.update(dt);
+    }
+
+    private setHealth(value: number){
+        this.health = Phaser.Math.Clamp(value,0,100);
+
+        events.emit('health-changed', this.health);
+        this.scene.sound.play(`hurt${Math.floor(Math.random()*3)+1}`);
+
+        if(this.health <= 0){
+            this.stateMachine.setState('dead');
+        }
     }
 
     private createAnimations(){
@@ -547,7 +611,7 @@ export default class PlayerController{
                     frame: 'jump-air.png'
                 }
             ],
-            repeat: -1
+            repeat: 0
         })
 
         this.sprite.anims.create({
@@ -663,6 +727,18 @@ export default class PlayerController{
                 },{
                     key: 'janel',
                     frame: 'beam11.png'
+                }
+            ],
+            repeat: 0
+        })
+
+        this.sprite.anims.create({
+            key: 'player-death',
+            frameRate: 4,
+            frames:[
+                {
+                    key:'janel',
+                    frame:'idle1.png'
                 }
             ],
             repeat: 0
