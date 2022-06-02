@@ -13,11 +13,14 @@ const config: Phaser.Types.Core.GameConfig = {
     physics: {
         default: 'matter',
         matter:{
-            debug: true,
+            debug: false,
             gravity: {x: 0, y: 1.5}
         }
     },
-    backgroundColor: '#2f3e46',
+    audio:{
+        disableWebAudio: true
+    },
+    backgroundColor: '#2f3e46', 
     scene: [MainMenu,LevelChoice,Game,UI]
 }
 

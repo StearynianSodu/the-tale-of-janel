@@ -36,7 +36,8 @@ export default class PlayerController{
 
         this.stateMachine = new StateMachine(this, 'player');
 
-        this.stateMachine.addState('idle',{
+        this.stateMachine
+        .addState('idle',{
             onEnter: ()=>{
                 this.sprite.play('player-idle');
                 this.sprite.setVelocityX(0);
@@ -82,13 +83,13 @@ export default class PlayerController{
                     if(this.sprite.body.velocity.x <= -5){
                         this.sprite.setVelocityX(-5);
                     }
-                    this.sprite.flipX = true;
+                    this.sprite.flipX = false;
                 }else if(this.keys.right.isDown){
-                    this.sprite.setVelocityX(this.sprite.body.velocity.x +0.5)
+                    this.sprite.setVelocityX(this.sprite.body.velocity.x + 0.5)
                     if(this.sprite.body.velocity.x >= 5){
                         this.sprite.setVelocityX(5);
                     }
-                    this.sprite.flipX = false;
+                    this.sprite.flipX = true;
                 }else{
                     this.stateMachine.setState('idle');
                 }
@@ -122,13 +123,13 @@ export default class PlayerController{
                     if(this.sprite.body.velocity.x <= -5){
                         this.sprite.setVelocityX(-5);
                     }
-                    this.sprite.flipX = true;
+                    this.sprite.flipX = false;
                 }else if(this.keys.right.isDown){
                     this.sprite.setVelocityX(this.sprite.body.velocity.x +0.5)
                     if(this.sprite.body.velocity.x >= 5){
                         this.sprite.setVelocityX(5);
                     }
-                    this.sprite.flipX = false;
+                    this.sprite.flipX = true;
                 }else{
                     this.sprite.setVelocityX(0);
                 }
@@ -157,13 +158,13 @@ export default class PlayerController{
                     if(this.sprite.body.velocity.x <= -5){
                         this.sprite.setVelocityX(-5);
                     }
-                    this.sprite.flipX = true;
+                    this.sprite.flipX = false;
                 }else if(this.keys.right.isDown){
                     this.sprite.setVelocityX(this.sprite.body.velocity.x +0.5)
                     if(this.sprite.body.velocity.x >= 5){
                         this.sprite.setVelocityX(5);
                     }
-                    this.sprite.flipX = false;
+                    this.sprite.flipX = true;
                 }else{
                     this.sprite.setVelocityX(0);
                 }
@@ -193,13 +194,13 @@ export default class PlayerController{
                     if(this.sprite.body.velocity.x <= -5){
                         this.sprite.setVelocityX(-5);
                     }
-                    this.sprite.flipX = true;
+                    this.sprite.flipX = false;
                 }else if(this.keys.right.isDown){
                     this.sprite.setVelocityX(this.sprite.body.velocity.x +0.5)
                     if(this.sprite.body.velocity.x >= 5){
                         this.sprite.setVelocityX(5);
                     }
-                    this.sprite.flipX = false;
+                    this.sprite.flipX = true;
                 }else{
                     this.sprite.setVelocityX(0);
                 }
@@ -208,7 +209,7 @@ export default class PlayerController{
         .addState('dash',{
             onEnter: ()=>{
                 this.sprite.play('player-dash');
-                if(this.sprite.flipX==true){
+                if(this.sprite.flipX==false){
                     this.sprite.setVelocity(0,0);
                     this.sprite.applyForce(new Phaser.Math.Vector2(-0.06,0));
                 }else{
@@ -258,8 +259,6 @@ export default class PlayerController{
         })
         .addState('spike-hit',{
             onEnter: ()=>{
-                this.sprite.play('player-jump');
-
                 this.sprite.setVelocityY(-8);
 
 
@@ -310,19 +309,68 @@ export default class PlayerController{
                 }
 
                 if(this.keys.left.isDown){
-                    this.sprite.setVelocityX(this.sprite.body.velocity.x -0.5)
-                    if(this.sprite.body.velocity.x <= -5){
-                        this.sprite.setVelocityX(-5);
-                    }
-                    this.sprite.flipX = true;
+                    this.stateMachine.setState('run');
                 }else if(this.keys.right.isDown){
-                    this.sprite.setVelocityX(this.sprite.body.velocity.x +0.5)
-                    if(this.sprite.body.velocity.x >= 5){
-                        this.sprite.setVelocityX(5);
-                    }
-                    this.sprite.flipX = false;
+                    this.stateMachine.setState('run');
                 }else{
-                    this.sprite.setVelocityX(0);
+                    this.stateMachine.setState('idle');
+                }
+            }
+        })
+        .addState('enemy-hit',{
+            onEnter: ()=>{
+                const startColor = Phaser.Display.Color.ValueToColor(0xffffff);
+                const endColor = Phaser.Display.Color.ValueToColor(0xff0000);
+                this.scene.tweens.addCounter({
+                    from: 0,
+                    to: 100,
+                    duration: 100,
+                    repeat: 2,
+                    yoyo: true,
+                    ease: Phaser.Math.Easing.Sine.InOut,
+                    onUpdate: tween =>{
+                        const value = tween.getValue()
+                        const colorObject = Phaser.Display.Color.Interpolate.ColorWithColor(
+                            startColor,
+                            endColor,
+                            100,
+                            value
+                        );
+
+                        const color = Phaser.Display.Color.GetColor(
+                            colorObject.r,
+                            colorObject.g,
+                            colorObject.b
+                        )
+
+                        this.sprite.setTint(color);
+                    }
+
+                })
+            },
+            onUpdate: ()=>{
+                if(this.sprite.body.velocity.y>0.1){
+                    this.stateMachine.setState('fall');
+                }
+
+                if(Phaser.Input.Keyboard.JustDown(this.keys.up)&&!this.doubleJumped){
+                    this.stateMachine.setState('double-jump');
+                }
+
+                if(this.keys.down.isDown){
+                    this.stateMachine.setState('smash');
+                }
+
+                if(this.keys.tertiary.isDown){
+                    this.stateMachine.setState('dash');
+                }
+
+                if(this.keys.left.isDown){
+                    this.stateMachine.setState('run');
+                }else if(this.keys.right.isDown){
+                    this.stateMachine.setState('run');
+                }else{
+                    this.stateMachine.setState('idle');
                 }
             }
         });
@@ -336,9 +384,19 @@ export default class PlayerController{
             const gameObjectB = bodyB.gameObject;
 
             if(this.obstacles.is('spike',bodyB)){
-                this.health = Phaser.Math.Clamp(this.health - 5, 0, 100);
+                this.health = Phaser.Math.Clamp(this.health - 10, 0, 100);
                 events.emit('health-changed', this.health);
                 this.stateMachine.setState('spike-hit');
+                this.scene.sound.play(`hurt${Math.floor(Math.random()*3)+1}`);
+                return;
+            }
+
+            if(this.obstacles.is('enemy',bodyB)){
+                this.health = Phaser.Math.Clamp(this.health - 10, 0, 100);
+                events.emit('health-changed', this.health);
+                this.stateMachine.setState('enemy-hit');
+                this.scene.sound.play(`hurt${Math.floor(Math.random()*3)+1}`);
+                return;
             }
 
             if(!gameObjectA){
@@ -362,6 +420,7 @@ export default class PlayerController{
                     case 'star':
                         console.log("Collided with star");
                         events.emit('star-collected');
+                        this.scene.sound.play(`happy${Math.floor(Math.random()*3)+1}`);
                         sprite.destroy();
                         break;
                     case 'butter':
@@ -388,47 +447,106 @@ export default class PlayerController{
     private createAnimations(){
         this.sprite.anims.create({
             key: 'player-idle',
-            frameRate: 8,
-            frames: [{
-                key: 'janel',
-                frame: 'jane.png'
-            }],
+            frameRate: 4,
+            frames: [
+                {
+                    key: 'janel',
+                    frame: 'idle1.png'
+                },{
+                    key: 'janel',
+                    frame: 'idle2.png'
+                },{
+                    key: 'janel',
+                    frame: 'idle3.png'
+                },{
+                    key: 'janel',
+                    frame: 'idle4.png'
+                },{
+                    key: 'janel',
+                    frame: 'idle5.png'
+                },{
+                    key: 'janel',
+                    frame: 'idle6.png'
+                },{
+                    key: 'janel',
+                    frame: 'idle7.png'
+                },{
+                    key: 'janel',
+                    frame: 'idle8.png'
+                }
+            ],
             repeat: -1
         })
 
         this.sprite.anims.create({
             key: 'player-run',
-            frames: [{
-                key: 'janel',
-                frame: 'jane.png'
-            }],
+            frameRate: 4,
+            frames: [
+                {
+                    key: 'janel',
+                    frame: 'walk1.png'
+                },{
+                    key: 'janel',
+                    frame: 'walk2.png'
+                },{
+                    key: 'janel',
+                    frame: 'walk3.png'
+                },{
+                    key: 'janel',
+                    frame: 'walk4.png'
+                },
+            ],
             repeat: -1
         })
 
         this.sprite.anims.create({
             key: 'player-jump',
-            frames: [{
-                key: 'janel',
-                frame: 'jane.png'
-            }],
-            repeat: -1
+            frameRate: 4,
+            frames: [
+                {
+                    key: 'janel',
+                    frame: 'jump1.png'
+                },{
+                    key: 'janel',
+                    frame: 'jump2.png'
+                },{
+                    key: 'janel',
+                    frame: 'jump-air.png'
+                }
+            ],
+            repeat: 0
         })
 
         this.sprite.anims.create({
             key: 'player-fall',
-            frames: [{
-                key: 'janel',
-                frame: 'jane.png'
-            }],
+            frameRate: 4,
+            frames: [
+                {
+                    key: 'janel',
+                    frame: 'fall1.png'
+                },{
+                    key: 'janel',
+                    frame: 'fall2.png'
+                }
+            ],
             repeat: -1
         })
 
         this.sprite.anims.create({
             key: 'player-double-jump',
-            frames: [{
-                key: 'janel',
-                frame: 'jane.png'
-            }],
+            frameRate: 4,
+            frames: [                
+                {
+                    key: 'janel',
+                    frame: 'jump1.png'
+                },{
+                    key: 'janel',
+                    frame: 'jump2.png'
+                },{
+                    key: 'janel',
+                    frame: 'jump-air.png'
+                }
+            ],
             repeat: -1
         })
 
@@ -443,20 +561,111 @@ export default class PlayerController{
 
         this.sprite.anims.create({
             key: 'player-smash',
-            frames: [{
-                key: 'janel',
-                frame: 'jane.png'
-            }],
+            frames: [
+                {
+                    key: 'janel',
+                    frame: 'land1.png'
+                }
+            ],
             repeat: -1
         })
 
         this.sprite.anims.create({
             key: 'player-land',
-            frames: [{
-                key: 'janel',
-                frame: 'jane.png'
-            }],
-            repeat: -1
+            frameRate: 4,
+            frames: [
+                {
+                    key: 'janel',
+                    frame: 'land1.png'
+                },{
+                    key: 'janel',
+                    frame: 'land.png'
+                }
+            ],
+            repeat: 0
+        })
+
+        this.sprite.anims.create({
+            key: 'player-special-attack',
+            frameRate: 4,
+            frames:[
+                {
+                    key: 'janel',
+                    frame: 'beam1.png'
+                },{
+                    key: 'janel',
+                    frame: 'beam2.png'
+                },{
+                    key: 'janel',
+                    frame: 'beam3.png'
+                },{
+                    key: 'janel',
+                    frame: 'beam4.png'
+                },{
+                    key: 'janel',
+                    frame: 'beam5.png'
+                },{
+                    key: 'janel',
+                    frame: 'beam6.png'
+                },{
+                    key: 'janel',
+                    frame: 'beam7.png'
+                },{
+                    key: 'janel',
+                    frame: 'beam8.png'
+                },{
+                    key: 'janel',
+                    frame: 'beam9.png'
+                },{
+                    key: 'janel',
+                    frame: 'beam10.png'
+                },{
+                    key: 'janel',
+                    frame: 'beam11.png'
+                }
+            ],
+            repeat: 0
+        })
+        this.sprite.anims.create({
+            key: 'player-primary-attack',
+            frameRate: 4,
+            frames:[
+                {
+                    key: 'janel',
+                    frame: 'beam1.png'
+                },{
+                    key: 'janel',
+                    frame: 'beam2.png'
+                },{
+                    key: 'janel',
+                    frame: 'beam3.png'
+                },{
+                    key: 'janel',
+                    frame: 'beam4.png'
+                },{
+                    key: 'janel',
+                    frame: 'beam5.png'
+                },{
+                    key: 'janel',
+                    frame: 'beam6.png'
+                },{
+                    key: 'janel',
+                    frame: 'beam7.png'
+                },{
+                    key: 'janel',
+                    frame: 'beam8.png'
+                },{
+                    key: 'janel',
+                    frame: 'beam9.png'
+                },{
+                    key: 'janel',
+                    frame: 'beam10.png'
+                },{
+                    key: 'janel',
+                    frame: 'beam11.png'
+                }
+            ],
+            repeat: 0
         })
     }
     

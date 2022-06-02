@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import LevelChoice from "./LevelChoice";
+import EnemyController from "./EnemyController";
 import ObstaclesController from "./ObstaclesController";
 import PlayerController from "./PlayerController";
 
@@ -13,6 +13,7 @@ export default class Game extends Phaser.Scene{
     private veil;
     private pauseTxt;
     private currentLevel;
+    private enemies: EnemyController[] = [];
 
     constructor(){
         super('game');
@@ -32,6 +33,7 @@ export default class Game extends Phaser.Scene{
         console.log(this.keys);
 
         this.obstacles = new ObstaclesController();
+        this.enemies = [];
 
         const data = Object.assign({level:1}, d);
         this.currentLevel = data.level;
@@ -40,11 +42,21 @@ export default class Game extends Phaser.Scene{
     preload(){
         this.load.image('tiles', 'assets/ForestTilesetNew.png');
         this.load.tilemapTiledJSON('tilemap', `levels/level${this.currentLevel}.json`);
-        this.load.atlas('janel', 'assets/janel-tmp.png','assets/janel-tmp.json');
+        this.load.atlas('janel', 'assets/janel.png','assets/janel.json');
+        this.load.atlas('enemy','assets/enemyTmp.png','assets/enemyTmp.json');
+
         this.load.image('star', 'assets/Star.png');
         //this.load.image('bg', 'assets/Background.png');
         this.load.image('cheese','assets/Cheese.png');
         this.load.image('butter','assets/Butter.png');
+
+        this.load.audio('hurt1','assets/Hurt1.mp3');
+        this.load.audio('hurt2','assets/Hurt2.mp3');
+        this.load.audio('hurt3','assets/Hurt3.mp3');
+
+        this.load.audio('happy1','assets/Happy1.mp3');
+        this.load.audio('happy2','assets/Happy2.mp3');
+        this.load.audio('happy3','assets/Happy3.mp3');
     }
 
     create(){
@@ -81,13 +93,11 @@ export default class Game extends Phaser.Scene{
     }
 
     update(t: number, dt: number){
-        if(!this.playerController){
-            return;
-        }
-
-        this.playerController.update(dt); 
-
-
+        this.playerController?.update(dt); 
+        
+        this.enemies.forEach(enemy => {
+            enemy.update(dt);
+        });
     }
 
     private createMap(){
@@ -157,6 +167,12 @@ export default class Game extends Phaser.Scene{
                     });
 
                     this.obstacles.add('spike',spike);
+                    break;
+                case 'enemySpawn':
+                    const enemy = this.matter.add.sprite(x,y,'enemy').setFixedRotation();
+                    enemy.setFriction(0);
+                    this.enemies.push(new EnemyController(enemy));
+                    this.obstacles.add('enemy',enemy.body as MatterJS.BodyType);
                     break;
             } 
 

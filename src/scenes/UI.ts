@@ -34,12 +34,12 @@ export default class UI extends Phaser.Scene{
     }
 
     create(){
-        this.add.image(0,0,'ui-bg').setOrigin(0,0);
+        this.add.image(0,0,'ui-bg').setOrigin(0,0).setDepth(2);
         this.graphics = this.add.graphics();
 
         this.starsLabel = this.add.text(64,870, `Stars: ${this.starsCount}`,{
             fontSize: '16px'
-        });
+        }).setDepth(3);
 
         this.setButterBar(0);
         this.setCheeseBar(0);
@@ -59,7 +59,7 @@ export default class UI extends Phaser.Scene{
         this.veil.fillRect(0,0,768,960);
         this.veil.setScrollFactor(0);
 
-        this.pauseTxt = this.add.text(32,32,'Paused',{
+        this.pauseTxt = this.add.text(64,64,'Paused',{
             fontSize: '64px'
         });
 
@@ -90,28 +90,28 @@ export default class UI extends Phaser.Scene{
         const percent = Phaser.Math.Clamp(value/100,0,100);
 
         this.graphics.fillStyle(0x808080);
-        this.graphics.fillRect(64,810, width, 16);
+        this.graphics.fillRect(64,810, width, 16).setDepth(3);
 
         this.graphics.fillStyle(0xff0000);
-        this.graphics.fillRect(64,810,percent*width,16);
+        this.graphics.fillRect(64,810,percent*width,16).setDepth(3);
     }
 
     private setButterBar(value:number){
         const width = 200
         this.graphics.fillStyle(0x808080);
-        this.graphics.fillRect(64,832,width,12);
+        this.graphics.fillRect(64,832,width,12).setDepth(3);
 
         this.graphics.fillStyle(0xf6e2b9);
-        this.graphics.fillRect(64,832,(value/4)*width,12); 
+        this.graphics.fillRect(64,832,(value/4)*width,12).setDepth(3);
     }
 
     private setCheeseBar(value: number){
         const width = 200
         this.graphics.fillStyle(0x808080);
-        this.graphics.fillRect(64,848,width,12);
+        this.graphics.fillRect(64,848,width,12).setDepth(3);
 
         this.graphics.fillStyle(0xffa600);
-        this.graphics.fillRect(64,848,(value/4)*width,12);
+        this.graphics.fillRect(64,848,(value/4)*width,12).setDepth(3);
     }
 
     private handleHealthChanged(value:number){
