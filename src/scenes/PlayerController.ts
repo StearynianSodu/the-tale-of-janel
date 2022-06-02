@@ -26,25 +26,34 @@ export default class PlayerController{
     private scene;
     private starsCollected;
     private enemies;
+    private level;
 
     private lastEnemy?: Phaser.Physics.Matter.Sprite;
 
 
-    constructor(sprite: Phaser.Physics.Matter.Sprite, keys: InputKeys, obstacles: ObstaclesController, scene: Phaser.Scene, enemies: number){
+    constructor(sprite: Phaser.Physics.Matter.Sprite, keys: InputKeys, obstacles: ObstaclesController, scene: Phaser.Scene, enemies: number, level){
         this.sprite = sprite;
         this.keys = keys;
         this.obstacles = obstacles;
         this.scene = scene;
         this.starsCollected = 0;
         this.enemies = enemies;
+        this.level = level;
 
         events.on('enemy-dead',()=>{
-            enemies--;
-            console.log(enemies);
-            if(enemies<=0){
+            this.enemies--;
+            if(this.starsCollected===5 && this.enemies === 0){
                 this.CheckWin();
             }
         },this);
+
+        events.off('enemy-dead',()=>{
+            this.enemies--;
+            if(this.starsCollected===5 && this.enemies === 0){
+                this.CheckWin();
+            }
+        },this);
+
 
         this.createAnimations();
 
@@ -433,7 +442,7 @@ export default class PlayerController{
                 this.sprite.setOnCollide(()=>{});
 
                 this.scene.time.delayedCall(1000,()=>{
-                    this.scene.scene.start('gameover');
+                    this.scene.scene.start('gameover',{level: this.level});
                 })
             }
         });
@@ -484,12 +493,14 @@ export default class PlayerController{
 
                 switch(type){
                     case 'star':
-                        console.log("Collided with star");
+                        this.starsCollected++;
+                        console.log("Collided with star ");
                         events.emit('star-collected');
                         this.scene.sound.play(`happy${Math.floor(Math.random()*3)+1}`);
                         sprite.destroy();
-                        this.starsCollected++;
-                        this.CheckWin();
+                        if(this.starsCollected===5 && this.enemies === 0){
+                            this.CheckWin();
+                        }
                         break;
                     case 'butter':
                         this.butter = Phaser.Math.Clamp(this.butter+1,0,4);
@@ -524,8 +535,9 @@ export default class PlayerController{
     }
 
     private CheckWin(){
-        if(this.starsCollected>=5){
-            this.scene.scene.start('level-completed');
+        console.log(this.starsCollected+" "+this.enemies);
+        if(this.starsCollected===5 && this.enemies===0){
+            this.scene.scene.start('level-completed',{level: `${this.level}`});
         }
     }
 

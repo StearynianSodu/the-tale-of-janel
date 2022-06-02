@@ -37,10 +37,10 @@ export default class GameOver extends Phaser.Scene{
     update(time: number, delta: number): void {
         
         if(Phaser.Input.Keyboard.JustDown(this.keys.space)){
-            this.scene.start('game',this.currentLevel);
+            this.scene.start('game',{level: this.currentLevel})
         }
         if(Phaser.Input.Keyboard.JustDown(this.keys.primary)){
-            this.scene.start('level-choice');
+            this.scene.start('level-choice',{level: this.currentLevel});
         }
     }
 

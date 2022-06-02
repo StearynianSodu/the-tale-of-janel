@@ -95,12 +95,11 @@ export default class Game extends Phaser.Scene{
 
         this.createObjects();
 
-        console.log(this.keys);
 
-        this.playerController = new PlayerController(this.player, this.keys, this.obstacles, this, this.enemies.length);
+        this.playerController = new PlayerController(this.player, this.keys, this.obstacles, this, this.enemies.length, this.currentLevel);
 
         this.events.on(Phaser.Scenes.Events.SHUTDOWN, () => {
-			this.cache.tilemap.remove('tilemap')
+			this.cache.tilemap.remove('tilemap');
 		})
 
     }
