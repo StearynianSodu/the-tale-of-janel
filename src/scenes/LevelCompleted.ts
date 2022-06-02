@@ -2,12 +2,13 @@ import Phaser from "phaser";
 
 export default class GameOver extends Phaser.Scene{
     private keys;
+    private currentLevel;
 
     constructor(){
         super('level-completed');
     }
 
-    init(){
+    init(d: {level: number}){
         this.keys = this.input.keyboard.addKeys({
             up: Phaser.Input.Keyboard.KeyCodes.UP, 
             down: Phaser.Input.Keyboard.KeyCodes.DOWN, 
@@ -18,6 +19,10 @@ export default class GameOver extends Phaser.Scene{
             tertiary: Phaser.Input.Keyboard.KeyCodes.Z,
             space: Phaser.Input.Keyboard.KeyCodes.SPACE
         });
+
+        
+        const data = Object.assign({level:1}, d);
+        this.currentLevel = data.level;
     }
 
     create(){
@@ -32,7 +37,7 @@ export default class GameOver extends Phaser.Scene{
     update(time: number, delta: number): void {
         
         if(Phaser.Input.Keyboard.JustDown(this.keys.space)){
-            this.scene.start('game');
+            this.scene.start('game',this.currentLevel);
         }
         if(Phaser.Input.Keyboard.JustDown(this.keys.primary)){
             this.scene.start('level-choice');

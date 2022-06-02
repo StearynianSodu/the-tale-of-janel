@@ -5,6 +5,7 @@ import UI from "./scenes/UI";
 import MainMenu from "./scenes/MainMenu";
 import LevelChoice from "./scenes/LevelChoice";
 import GameOver from "./scenes/GameOver";
+import LevelCompleted from "./scenes/LevelCompleted";
 
 
 const config: Phaser.Types.Core.GameConfig = {
@@ -22,7 +23,7 @@ const config: Phaser.Types.Core.GameConfig = {
         disableWebAudio: true
     },
     backgroundColor: '#2f3e46', 
-    scene: [MainMenu,LevelChoice,Game,UI,GameOver]
+    scene: [MainMenu,LevelChoice,Game,UI,GameOver,LevelCompleted]
 }
 
 export default new Phaser.Game(config);

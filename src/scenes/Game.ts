@@ -44,8 +44,9 @@ export default class Game extends Phaser.Scene{
     }
 
     preload(){
+        
+
         this.load.image('tiles', 'assets/ForestTilesetNew.png');
-        this.load.tilemapTiledJSON('tilemap', `levels/level${this.currentLevel}.json`);
         this.load.atlas('janel', 'assets/janel.png','assets/janel.json');
         this.load.atlas('enemy','assets/enemyTmp.png','assets/enemyTmp.json');
 
@@ -61,9 +62,13 @@ export default class Game extends Phaser.Scene{
         this.load.audio('happy1','assets/Happy1.mp3');
         this.load.audio('happy2','assets/Happy2.mp3');
         this.load.audio('happy3','assets/Happy3.mp3');
+        
+        this.load.tilemapTiledJSON('tilemap', `levels/level${this.currentLevel}.json`);
     }
 
-    create(){
+    create(d: { level: number }){
+
+
         this.scene.launch('ui');
 
         //this.add.image(0,0,'bg').setOrigin(0,0);
@@ -92,7 +97,11 @@ export default class Game extends Phaser.Scene{
 
         console.log(this.keys);
 
-        this.playerController = new PlayerController(this.player, this.keys, this.obstacles, this);
+        this.playerController = new PlayerController(this.player, this.keys, this.obstacles, this, this.enemies.length);
+
+        this.events.on(Phaser.Scenes.Events.SHUTDOWN, () => {
+			this.cache.tilemap.remove('tilemap')
+		})
 
     }
 

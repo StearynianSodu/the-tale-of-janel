@@ -24,15 +24,27 @@ export default class PlayerController{
     private cheese = 0;
     private obstacles;
     private scene;
+    private starsCollected;
+    private enemies;
 
     private lastEnemy?: Phaser.Physics.Matter.Sprite;
 
 
-    constructor(sprite: Phaser.Physics.Matter.Sprite, keys: InputKeys, obstacles: ObstaclesController, scene: Phaser.Scene){
+    constructor(sprite: Phaser.Physics.Matter.Sprite, keys: InputKeys, obstacles: ObstaclesController, scene: Phaser.Scene, enemies: number){
         this.sprite = sprite;
         this.keys = keys;
         this.obstacles = obstacles;
         this.scene = scene;
+        this.starsCollected = 0;
+        this.enemies = enemies;
+
+        events.on('enemy-dead',()=>{
+            enemies--;
+            console.log(enemies);
+            if(enemies<=0){
+                this.CheckWin();
+            }
+        },this);
 
         this.createAnimations();
 
@@ -446,6 +458,7 @@ export default class PlayerController{
                 this.lastEnemy = bodyB.gameObject;
                 if(this.stateMachine.isCurrentState('dash')||this.stateMachine.isCurrentState('smash')){
                     this.stateMachine.setState('enemy-damaged');
+                    
                     return;
                 }
                 this.stateMachine.setState('enemy-hit');
@@ -475,6 +488,8 @@ export default class PlayerController{
                         events.emit('star-collected');
                         this.scene.sound.play(`happy${Math.floor(Math.random()*3)+1}`);
                         sprite.destroy();
+                        this.starsCollected++;
+                        this.CheckWin();
                         break;
                     case 'butter':
                         this.butter = Phaser.Math.Clamp(this.butter+1,0,4);
@@ -505,6 +520,12 @@ export default class PlayerController{
 
         if(this.health <= 0){
             this.stateMachine.setState('dead');
+        }
+    }
+
+    private CheckWin(){
+        if(this.starsCollected>=5){
+            this.scene.scene.start('level-completed');
         }
     }
 
@@ -618,7 +639,7 @@ export default class PlayerController{
             key: 'player-dash',
             frames: [{
                 key: 'janel',
-                frame: 'jane.png'
+                frame: 'janel.png'
             }],
             repeat: -1
         })
@@ -643,7 +664,7 @@ export default class PlayerController{
                     frame: 'land1.png'
                 },{
                     key: 'janel',
-                    frame: 'land.png'
+                    frame: 'land2.png'
                 }
             ],
             repeat: 0

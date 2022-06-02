@@ -4,10 +4,11 @@ import Phaser from "phaser";
 export default class LevelChoice extends Phaser.Scene{
     private keys;
     private levelCount = 2;
-    private currentLevel = 1;
+    private currentLevel;
     private levelLabel;
     constructor(){
         super('level-choice');
+        this.currentLevel = 1;
     }
 
     init(){

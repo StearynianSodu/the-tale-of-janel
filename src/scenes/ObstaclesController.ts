@@ -12,7 +12,6 @@ export default class ObstaclesController{
             throw new Error('Key already exists')
         }
         this.obstacles.set(key,body)
-
     }
 
     is(name: string, body: MatterJS.BodyType){
@@ -24,4 +23,5 @@ export default class ObstaclesController{
 
         return false
     }
+
 }

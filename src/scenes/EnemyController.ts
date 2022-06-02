@@ -6,11 +6,13 @@ export default class EnemyController{
     private stateMachine: StateMachine;
     private moveTime: number;
     private scene: Phaser.Scene;
+    private obstacles;
 
     constructor(sprite: Phaser.Physics.Matter.Sprite, scene: Phaser.Scene){
         this.sprite = sprite;
         this.stateMachine = new StateMachine(this, 'enemy');
         this.scene = scene;
+        this.obstacles = this.obstacles;
 
         this.stateMachine
         .addState('move-left',{
@@ -44,7 +46,18 @@ export default class EnemyController{
             }
         })
         .addState('dead',{
-
+            onEnter: ()=>{
+                events.emit('enemy-dead');
+                this.scene.tweens.add({
+                    targets: this.sprite,
+                    displayHeight: 0,
+                    y: this.sprite.y + (this.sprite.displayHeight * 0,5),
+                    duration: 200,
+                    onComplete:()=>{
+                        this.sprite.destroy();
+                    }
+                })
+            }
         });
 
         this.stateMachine.setState('move-right');
@@ -58,16 +71,6 @@ export default class EnemyController{
         }
 
         events.off('enemy-damaged', this.handleDamaged, this);
-
-        this.scene.tweens.add({
-            targets: this.sprite,
-            displayHeight: 0,
-            y: this.sprite.y + (this.sprite.displayHeight * 0,5),
-            duration: 200,
-            onComplete:()=>{
-                this.sprite.destroy();
-            }
-        })
 
         this.stateMachine.setState('dead');
     }
