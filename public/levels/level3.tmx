@@ -497,7 +497,6 @@
   <object id="7" name="spike" x="352.716" y="513.124" width="60.1531" height="61.0645"/>
   <object id="8" name="spike" x="192.308" y="641.633" width="28.2537" height="61.0645"/>
   <object id="10" name="spike" x="384.615" y="674.444" width="28.2537" height="29.1651"/>
-  <object id="13" name="enemySpawn" x="557.783" y="143.091"/>
   <object id="14" name="enemySpawn" x="143.091" y="678.089"/>
   <object id="15" name="enemySpawn" x="460.262" y="679.001"/>
   <object id="17" name="butter" x="112.103" y="237.878"/>
