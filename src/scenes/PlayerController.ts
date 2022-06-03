@@ -28,6 +28,7 @@ export default class PlayerController{
     private enemies;
     private level;
     private damage;
+    private canSpecial;
 
     private lastEnemy?: Phaser.Physics.Matter.Sprite;
 
@@ -40,6 +41,7 @@ export default class PlayerController{
         this.starsCollected = 0;
         this.enemies = enemies;
         this.level = level;
+        this.canSpecial = false;
 
         events.on('enemy-dead',()=>{
             this.enemies--;
@@ -83,11 +85,31 @@ export default class PlayerController{
                     this.stateMachine.setState('fall');
                 }
 
+                if(this.keys.primary.isDown){
+                    this.stateMachine.setState('primary');
+                }
+                if(this.keys.secondary.isDown){
+                    if(this.butter===4&&this.cheese===4){
+                        this.butter=0;
+                        this.cheese=0;
+                        events.emit('butter-changed', this.butter);
+                        events.emit('cheese-changed', this.cheese);
+                        this.stateMachine.setState('special');
+                    }
+                }
+
             }
         })
         .addState('run',{
             onEnter: ()=>{
                 this.sprite.play('player-run');
+                if(this.keys.left.isDown){
+                    this.sprite.setVelocityX(-1);
+                    this.sprite.flipX = false;
+                }else if(this.keys.right.isDown){
+                    this.sprite.setVelocityX(1);
+                    this.sprite.flipX = true;
+                }
             },
             onUpdate: ()=>{
                 if(Phaser.Input.Keyboard.JustDown(this.keys.up)){
@@ -114,8 +136,21 @@ export default class PlayerController{
                         this.sprite.setVelocityX(5);
                     }
                     this.sprite.flipX = true;
-                }else{
+                }else if(this.sprite.body.velocity.y===0){
                     this.stateMachine.setState('idle');
+                }
+
+                if(this.keys.primary.isDown){
+                    this.stateMachine.setState('primary');
+                }
+                if(this.keys.secondary.isDown){
+                    if(this.butter===4&&this.cheese===4){
+                        this.butter=0;
+                        this.cheese=0;
+                        events.emit('butter-changed', this.butter);
+                        events.emit('cheese-changed', this.cheese);
+                        this.stateMachine.setState('special');
+                    }
                 }
             }
         })
@@ -402,10 +437,26 @@ export default class PlayerController{
             }
         })
         .addState('primary',{
-
+            onEnter: ()=>{
+                this.sprite.setVelocityX(0);
+                this.sprite.play('player-primary-attack');
+            },
+            onUpdate: ()=>{
+                this.scene.time.delayedCall(350,()=>{
+                    this.stateMachine.setState('idle');
+                })
+            }
         })
         .addState('special',{
-
+            onEnter: ()=>{
+                this.sprite.setVelocityX(0);
+                this.sprite.play('player-special-attack');
+            },
+            onUpdate: ()=>{
+                this.scene.time.delayedCall(1200,()=>{
+                    this.stateMachine.setState('idle');
+                })
+            }
         })
         .addState('enemy-damaged',{
             onEnter:()=>{
@@ -733,7 +784,7 @@ export default class PlayerController{
         })
         this.sprite.anims.create({
             key: 'player-primary-attack',
-            frameRate: 4,
+            frameRate: 8,
             frames:[
                 {
                     key: 'janel',
@@ -757,7 +808,7 @@ export default class PlayerController{
 
         this.sprite.anims.create({
             key: 'player-death',
-            frameRate: 4,
+            frameRate: 8,
             frames:[
                 {
                     key:'janel',
