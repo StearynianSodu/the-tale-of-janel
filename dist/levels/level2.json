@@ -204,8 +204,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":335.351653469958,
-                 "y":187.796925943177
+                 "x":335.352,
+                 "y":187.797
                 }, 
                 {
                  "height":0,
@@ -215,8 +215,140 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":431.038658593386,
-                 "y":486.483465300419
+                 "x":431.039,
+                 "y":486.483
+                }, 
+                {
+                 "height":0,
+                 "id":34,
+                 "name":"butter",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":149.343269678621,
+                 "y":354.131346064276
+                }, 
+                {
+                 "height":0,
+                 "id":35,
+                 "name":"butter",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":171.700046576619,
+                 "y":340.717279925477
+                }, 
+                {
+                 "height":0,
+                 "id":36,
+                 "name":"cheese",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":150.237540754541,
+                 "y":317.46623195156
+                }, 
+                {
+                 "height":0,
+                 "id":37,
+                 "name":"cheese",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":169.017233348859,
+                 "y":290.638099673964
+                }, 
+                {
+                 "height":0,
+                 "id":38,
+                 "name":"butter",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":268.281322775966,
+                 "y":591.113181183046
+                }, 
+                {
+                 "height":0,
+                 "id":39,
+                 "name":"cheese",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":245.924545877969,
+                 "y":562.49650675361
+                }, 
+                {
+                 "height":0,
+                 "id":40,
+                 "name":"butter",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":295.109455053563,
+                 "y":539.245458779693
+                }, 
+                {
+                 "height":0,
+                 "id":41,
+                 "name":"butter",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":531.197019096414,
+                 "y":456.078248719143
+                }, 
+                {
+                 "height":0,
+                 "id":42,
+                 "name":"cheese",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":509.734513274336,
+                 "y":465.915230554262
+                }, 
+                {
+                 "height":0,
+                 "id":43,
+                 "name":"butter",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":558.91942244993,
+                 "y":473.069399161621
+                }, 
+                {
+                 "height":0,
+                 "id":44,
+                 "name":"cheese",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":560.70796460177,
+                 "y":156.49743828598
+                }, 
+                {
+                 "height":0,
+                 "id":45,
+                 "name":"butter",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":561.60223567769,
+                 "y":183.325570563577
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -225,7 +357,7 @@
          "y":0
         }],
  "nextlayerid":5,
- "nextobjectid":34,
+ "nextobjectid":46,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.7.2",

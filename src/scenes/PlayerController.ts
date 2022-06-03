@@ -349,7 +349,7 @@ export default class PlayerController{
                     }
                 })
 
-                this.setHealth(this.health-10);
+                this.setHealth(this.health-3);
             },
             onUpdate: ()=>{
                 if(this.sprite.body.velocity.y>0.1){
@@ -407,7 +407,7 @@ export default class PlayerController{
                     }
                 })
 
-                this.setHealth(this.health-10);
+                this.setHealth(this.health-5);
                 
             },
             onUpdate: ()=>{

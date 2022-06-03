@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="24" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="17">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="24" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="47">
+ <editorsettings>
+  <export target="level3.json" format="json"/>
+ </editorsettings>
  <tileset firstgid="1" name="ForestTilesetNew" tilewidth="32" tileheight="32" tilecount="85" columns="17">
   <image source="../assets/ForestTilesetNew.png" width="544" height="160"/>
   <tile id="0">
@@ -500,6 +503,32 @@
   <object id="13" name="enemySpawn" x="557.783" y="143.091"/>
   <object id="14" name="enemySpawn" x="143.091" y="678.089"/>
   <object id="15" name="enemySpawn" x="460.262" y="679.001"/>
-  <object id="16" name="enemySpawn" x="430.186" y="558.695"/>
+  <object id="17" name="butter" x="112.103" y="237.878"/>
+  <object id="18" name="cheese" x="111.192" y="209.624"/>
+  <object id="19" x="270.689" y="298.943"/>
+  <object id="20" name="cheese" x="216.004" y="112.103"/>
+  <object id="21" name="cheese" x="237.878" y="82.9383"/>
+  <object id="22" name="butter" x="266.132" y="113.926"/>
+  <object id="23" name="butter" x="238.79" y="134.889"/>
+  <object id="24" name="cheese" x="485.782" y="111.192"/>
+  <object id="25" name="butter" x="495.807" y="131.243"/>
+  <object id="26" name="butter" x="513.124" y="128.509"/>
+  <object id="27" name="cheese" x="596.974" y="263.398"/>
+  <object id="28" name="butter" x="610.645" y="241.524"/>
+  <object id="29" name="cheese" x="621.582" y="262.486"/>
+  <object id="30" name="cheese" x="589.683" y="424.717"/>
+  <object id="31" name="cheese" x="606.088" y="401.932"/>
+  <object id="32" name="butter" x="619.759" y="426.54"/>
+  <object id="33" name="butter" x="318.994" y="545.023"/>
+  <object id="34" name="cheese" x="319.905" y="519.504"/>
+  <object id="35" name="cheese" x="316.259" y="492.162"/>
+  <object id="39" name="butter" x="113.926" y="649.836"/>
+  <object id="40" name="butter" x="140.357" y="627.962"/>
+  <object id="41" name="cheese" x="118.483" y="612.468"/>
+  <object id="42" name="butter" x="317.171" y="650.747"/>
+  <object id="43" name="cheese" x="341.779" y="639.81"/>
+  <object id="44" name="butter" x="507.656" y="627.05"/>
+  <object id="45" name="butter" x="520.415" y="607.911"/>
+  <object id="46" name="cheese" x="541.378" y="626.139"/>
  </objectgroup>
 </map>

@@ -67,6 +67,7 @@ export default class Game extends Phaser.Scene{
     }
 
     create(d: { level: number }){
+
         this.createEnemyAnims();
 
         this.scene.launch('ui');
@@ -103,6 +104,7 @@ export default class Game extends Phaser.Scene{
 		})
 
     }
+
 
     destroy(){
         this.scene.stop('ui');
@@ -158,7 +160,7 @@ export default class Game extends Phaser.Scene{
     }
 
     private createButter(x:number,y:number){
-        const cheese = this.matter.add.sprite(x,y,'butter',undefined,{
+        const butter = this.matter.add.sprite(x,y,'butter',undefined,{
             isStatic:false
         }).setData({type: 'butter'});
     }
@@ -174,8 +176,6 @@ export default class Game extends Phaser.Scene{
                     break;
                 case 'star':
                     this.createStar(x,y);
-                    this.createCheese(x,y);
-                    this.createButter(x,y);
                     break;
                 case 'spike':
                     const spike = this.matter.add.rectangle(x+width*0.5, y+height*0.5, width, height, {
@@ -191,6 +191,11 @@ export default class Game extends Phaser.Scene{
                     this.enemies.push(new EnemyController(enemy,this));
                     this.obstacles.add('enemy',enemy.body as MatterJS.BodyType);
                     break;
+                case 'butter':
+                    this.createButter(x,y);
+                    break;
+                case 'cheese':
+                    this.createCheese(x,y);
             } 
 
 
