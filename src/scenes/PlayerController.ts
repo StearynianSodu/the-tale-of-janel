@@ -379,6 +379,7 @@ export default class PlayerController{
         })
         .addState('enemy-hit',{
             onEnter: ()=>{
+                this.sprite.setVelocityY(-4);
                 const startColor = Phaser.Display.Color.ValueToColor(0xffffff);
                 const endColor = Phaser.Display.Color.ValueToColor(0xff0000);
                 this.scene.tweens.addCounter({
@@ -460,6 +461,7 @@ export default class PlayerController{
         })
         .addState('enemy-damaged',{
             onEnter:()=>{
+                this.sprite.setVelocityY(-4);
                 events.emit('enemy-damaged',this.lastEnemy,this.damage);
             },
             onUpdate: ()=>{
