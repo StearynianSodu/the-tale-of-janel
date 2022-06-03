@@ -3,7 +3,7 @@ import Phaser from "phaser";
 
 export default class LevelChoice extends Phaser.Scene{
     private keys;
-    private levelCount = 2;
+    private levelCount = 3;
     private currentLevel;
     private levelLabel;
     constructor(){
