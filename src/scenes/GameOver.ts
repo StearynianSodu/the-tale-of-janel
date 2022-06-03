@@ -1,5 +1,4 @@
 import Phaser from "phaser";
-import Game from "./Game";
 
 export default class GameOver extends Phaser.Scene{
     private keys;

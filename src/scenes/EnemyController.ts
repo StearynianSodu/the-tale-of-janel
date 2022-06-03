@@ -61,6 +61,7 @@ export default class EnemyController{
                     y: this.sprite.y + (this.sprite.displayHeight * 0,5),
                     duration: 200,
                     onComplete:()=>{
+                        this.sprite.stop();
                         this.sprite.destroy();
                     }
                 })
@@ -115,6 +116,7 @@ export default class EnemyController{
         this.stateMachine.setState('move-right');
 
         events.on('enemy-damaged', this.handleDamaged, this);
+        //events.off('enemy-damaged', this.handleDamaged, this);
     }
 
     private handleDamaged(enemy: Phaser.Physics.Matter.Sprite){

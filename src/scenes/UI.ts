@@ -52,7 +52,6 @@ export default class UI extends Phaser.Scene{
 
         this.events.once(Phaser.Scenes.Events.SHUTDOWN, ()=>{
             events.off('star-collected', this.handleStarCollected, this);
-            events.off('star-collected', this.handleStarCollected, this);
             events.off('butter-changed', this.handleButterChanged, this);
             events.off('cheese-changed', this.handleCheeseChanged, this);
             events.off('health-changed', this.handleHealthChanged, this);

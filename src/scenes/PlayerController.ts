@@ -28,7 +28,6 @@ export default class PlayerController{
     private enemies;
     private level;
     private damage;
-    private canSpecial;
 
     private lastEnemy?: Phaser.Physics.Matter.Sprite;
 
@@ -41,7 +40,6 @@ export default class PlayerController{
         this.starsCollected = 0;
         this.enemies = enemies;
         this.level = level;
-        this.canSpecial = false;
 
         events.on('enemy-dead',()=>{
             this.enemies--;
@@ -379,7 +377,7 @@ export default class PlayerController{
         })
         .addState('enemy-hit',{
             onEnter: ()=>{
-                this.sprite.setVelocityY(-4);
+                this.sprite.setVelocityY(-8);
                 const startColor = Phaser.Display.Color.ValueToColor(0xffffff);
                 const endColor = Phaser.Display.Color.ValueToColor(0xff0000);
                 this.scene.tweens.addCounter({
@@ -461,7 +459,7 @@ export default class PlayerController{
         })
         .addState('enemy-damaged',{
             onEnter:()=>{
-                this.sprite.setVelocityY(-4);
+                this.sprite.setVelocityY(-8);
                 events.emit('enemy-damaged',this.lastEnemy,this.damage);
             },
             onUpdate: ()=>{
