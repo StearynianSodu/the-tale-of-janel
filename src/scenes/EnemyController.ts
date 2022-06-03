@@ -7,41 +7,48 @@ export default class EnemyController{
     private moveTime: number;
     private scene: Phaser.Scene;
     private obstacles;
+    private health;
+    private nextState;
 
     constructor(sprite: Phaser.Physics.Matter.Sprite, scene: Phaser.Scene){
         this.sprite = sprite;
         this.stateMachine = new StateMachine(this, 'enemy');
         this.scene = scene;
         this.obstacles = this.obstacles;
+        this.health = 3;
 
         this.stateMachine
         .addState('move-left',{
             onEnter: ()=>{
-                this.sprite.setVelocityX(-3);
+                this.sprite.play('enemy-walk');
+                this.sprite.setVelocityX(-2);
                 this.sprite.flipX = false;
                 this.moveTime = 0;
             },
             onUpdate: (dt: number)=>{
-                this.sprite.setVelocityX(-3);
+                this.sprite.setVelocityX(-2);
                 this.moveTime += dt;
 
-                if(this.moveTime > 1200){
-                    this.stateMachine.setState('move-right');
+                if(this.moveTime > 2000){
+                    this.nextState = 'move-right';
+                    this.stateMachine.setState('attack');
                 }
             }
         })
         .addState('move-right',{
             onEnter: ()=>{
-                this.sprite.setVelocityX(3);
+                this.sprite.play('enemy-walk');
+                this.sprite.setVelocityX(2);
                 this.sprite.flipX = true;
                 this.moveTime = 0;
             },
             onUpdate: (dt: number)=>{
-                this.sprite.setVelocityX(3);
+                this.sprite.setVelocityX(2);
                 this.moveTime += dt;
 
-                if(this.moveTime > 1200){
-                    this.stateMachine.setState('move-left');
+                if(this.moveTime > 2000){
+                    this.nextState = 'move-left';
+                    this.stateMachine.setState('attack');
                 }
             }
         })
@@ -58,6 +65,51 @@ export default class EnemyController{
                     }
                 })
             }
+        })
+        .addState('damaged',{
+            onEnter: ()=>{
+                const startColor = Phaser.Display.Color.ValueToColor(0xffffff);
+                const endColor = Phaser.Display.Color.ValueToColor(0xff0000);
+                this.scene.tweens.addCounter({
+                    from: 0,
+                    to: 100,
+                    duration: 100,
+                    repeat: 2,
+                    yoyo: true,
+                    ease: Phaser.Math.Easing.Sine.InOut,
+                    onUpdate: tween =>{
+                        const value = tween.getValue()
+                        const colorObject = Phaser.Display.Color.Interpolate.ColorWithColor(
+                            startColor,
+                            endColor,
+                            100,
+                            value
+                        );
+
+                        const color = Phaser.Display.Color.GetColor(
+                            colorObject.r,
+                            colorObject.g,
+                            colorObject.b
+                        )
+
+                        this.sprite.setTint(color);
+                    }
+                })
+            },
+            onUpdate: ()=>{
+                this.stateMachine.setState('move-left');
+            }
+        })
+        .addState('attack',{
+            onEnter: ()=>{
+                this.sprite.play('enemy-attack');
+                this.sprite.setVelocityX(0);
+            },
+            onUpdate: ()=>{
+                this.scene.time.delayedCall(1000,()=>{
+                    this.stateMachine.setState(this.nextState);
+                })
+            }
         });
 
         this.stateMachine.setState('move-right');
@@ -70,9 +122,14 @@ export default class EnemyController{
             return;
         }
 
-        events.off('enemy-damaged', this.handleDamaged, this);
-
-        this.stateMachine.setState('dead');
+        if(this.stateMachine.isCurrentState('attack')){
+            return;
+        }
+        this.health = Phaser.Math.Clamp(this.health - 1, 0, 3);
+        if(this.health<=0)
+            this.stateMachine.setState('dead');
+        else
+            this.stateMachine.setState('damaged');
     }
 
     destroy(){
@@ -82,6 +139,4 @@ export default class EnemyController{
     update(dt: number){
         this.stateMachine.update(dt);
     }
-
-    //TODO: create global anims for the enemy
 }

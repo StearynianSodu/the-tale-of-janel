@@ -89,7 +89,7 @@
 	"sourceSize": {"w":96,"h":32}
 },
 {
-	"filename": "fall1.png",
+	"filename": "dash1.png",
 	"frame": {"x":1056,"y":0,"w":32,"h":32},
 	"rotated": false,
 	"trimmed": false,
@@ -97,7 +97,7 @@
 	"sourceSize": {"w":32,"h":32}
 },
 {
-	"filename": "fall2.png",
+	"filename": "dash2.png",
 	"frame": {"x":1088,"y":0,"w":32,"h":32},
 	"rotated": false,
 	"trimmed": false,
@@ -105,7 +105,7 @@
 	"sourceSize": {"w":32,"h":32}
 },
 {
-	"filename": "idle1.png",
+	"filename": "death1.png",
 	"frame": {"x":1120,"y":0,"w":32,"h":32},
 	"rotated": false,
 	"trimmed": false,
@@ -113,7 +113,7 @@
 	"sourceSize": {"w":32,"h":32}
 },
 {
-	"filename": "idle2.png",
+	"filename": "death2.png",
 	"frame": {"x":1152,"y":0,"w":32,"h":32},
 	"rotated": false,
 	"trimmed": false,
@@ -121,7 +121,7 @@
 	"sourceSize": {"w":32,"h":32}
 },
 {
-	"filename": "idle3.png",
+	"filename": "death3.png",
 	"frame": {"x":1184,"y":0,"w":32,"h":32},
 	"rotated": false,
 	"trimmed": false,
@@ -129,7 +129,7 @@
 	"sourceSize": {"w":32,"h":32}
 },
 {
-	"filename": "idle4.png",
+	"filename": "death4.png",
 	"frame": {"x":1216,"y":0,"w":32,"h":32},
 	"rotated": false,
 	"trimmed": false,
@@ -137,7 +137,7 @@
 	"sourceSize": {"w":32,"h":32}
 },
 {
-	"filename": "idle5.png",
+	"filename": "fall1.png",
 	"frame": {"x":1248,"y":0,"w":32,"h":32},
 	"rotated": false,
 	"trimmed": false,
@@ -145,7 +145,7 @@
 	"sourceSize": {"w":32,"h":32}
 },
 {
-	"filename": "idle6.png",
+	"filename": "fall2.png",
 	"frame": {"x":1280,"y":0,"w":32,"h":32},
 	"rotated": false,
 	"trimmed": false,
@@ -153,7 +153,7 @@
 	"sourceSize": {"w":32,"h":32}
 },
 {
-	"filename": "idle7.png",
+	"filename": "idle1.png",
 	"frame": {"x":1312,"y":0,"w":32,"h":32},
 	"rotated": false,
 	"trimmed": false,
@@ -161,7 +161,7 @@
 	"sourceSize": {"w":32,"h":32}
 },
 {
-	"filename": "idle8.png",
+	"filename": "idle2.png",
 	"frame": {"x":1344,"y":0,"w":32,"h":32},
 	"rotated": false,
 	"trimmed": false,
@@ -169,7 +169,7 @@
 	"sourceSize": {"w":32,"h":32}
 },
 {
-	"filename": "jump-air.png",
+	"filename": "idle3.png",
 	"frame": {"x":1376,"y":0,"w":32,"h":32},
 	"rotated": false,
 	"trimmed": false,
@@ -177,7 +177,7 @@
 	"sourceSize": {"w":32,"h":32}
 },
 {
-	"filename": "jump1.png",
+	"filename": "idle4.png",
 	"frame": {"x":1408,"y":0,"w":32,"h":32},
 	"rotated": false,
 	"trimmed": false,
@@ -185,7 +185,7 @@
 	"sourceSize": {"w":32,"h":32}
 },
 {
-	"filename": "jump2.png",
+	"filename": "idle5.png",
 	"frame": {"x":1440,"y":0,"w":32,"h":32},
 	"rotated": false,
 	"trimmed": false,
@@ -193,7 +193,7 @@
 	"sourceSize": {"w":32,"h":32}
 },
 {
-	"filename": "land1.png",
+	"filename": "idle6.png",
 	"frame": {"x":1472,"y":0,"w":32,"h":32},
 	"rotated": false,
 	"trimmed": false,
@@ -201,7 +201,7 @@
 	"sourceSize": {"w":32,"h":32}
 },
 {
-	"filename": "land2.png",
+	"filename": "idle7.png",
 	"frame": {"x":1504,"y":0,"w":32,"h":32},
 	"rotated": false,
 	"trimmed": false,
@@ -209,7 +209,7 @@
 	"sourceSize": {"w":32,"h":32}
 },
 {
-	"filename": "walk1.png",
+	"filename": "idle8.png",
 	"frame": {"x":1536,"y":0,"w":32,"h":32},
 	"rotated": false,
 	"trimmed": false,
@@ -217,7 +217,7 @@
 	"sourceSize": {"w":32,"h":32}
 },
 {
-	"filename": "walk2.png",
+	"filename": "jump-air.png",
 	"frame": {"x":1568,"y":0,"w":32,"h":32},
 	"rotated": false,
 	"trimmed": false,
@@ -225,7 +225,7 @@
 	"sourceSize": {"w":32,"h":32}
 },
 {
-	"filename": "walk3.png",
+	"filename": "jump1.png",
 	"frame": {"x":1600,"y":0,"w":32,"h":32},
 	"rotated": false,
 	"trimmed": false,
@@ -233,8 +233,96 @@
 	"sourceSize": {"w":32,"h":32}
 },
 {
-	"filename": "walk4.png",
+	"filename": "jump2.png",
 	"frame": {"x":1632,"y":0,"w":32,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
+	"sourceSize": {"w":32,"h":32}
+},
+{
+	"filename": "land1.png",
+	"frame": {"x":1664,"y":0,"w":32,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
+	"sourceSize": {"w":32,"h":32}
+},
+{
+	"filename": "land2.png",
+	"frame": {"x":1696,"y":0,"w":32,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
+	"sourceSize": {"w":32,"h":32}
+},
+{
+	"filename": "shoot1.png",
+	"frame": {"x":1728,"y":0,"w":96,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":96,"h":32},
+	"sourceSize": {"w":96,"h":32}
+},
+{
+	"filename": "shoot2.png",
+	"frame": {"x":1824,"y":0,"w":96,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":96,"h":32},
+	"sourceSize": {"w":96,"h":32}
+},
+{
+	"filename": "shoot3.png",
+	"frame": {"x":1920,"y":0,"w":96,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":96,"h":32},
+	"sourceSize": {"w":96,"h":32}
+},
+{
+	"filename": "shoot4.png",
+	"frame": {"x":2016,"y":0,"w":96,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":96,"h":32},
+	"sourceSize": {"w":96,"h":32}
+},
+{
+	"filename": "shoot5.png",
+	"frame": {"x":2112,"y":0,"w":96,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":96,"h":32},
+	"sourceSize": {"w":96,"h":32}
+},
+{
+	"filename": "walk1.png",
+	"frame": {"x":2208,"y":0,"w":32,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
+	"sourceSize": {"w":32,"h":32}
+},
+{
+	"filename": "walk2.png",
+	"frame": {"x":2240,"y":0,"w":32,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
+	"sourceSize": {"w":32,"h":32}
+},
+{
+	"filename": "walk3.png",
+	"frame": {"x":2272,"y":0,"w":32,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
+	"sourceSize": {"w":32,"h":32}
+},
+{
+	"filename": "walk4.png",
+	"frame": {"x":2304,"y":0,"w":32,"h":32},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
@@ -245,8 +333,8 @@
 	"version": "1.0",
 	"image": "janel.png",
 	"format": "RGBA8888",
-	"size": {"w":1664,"h":32},
+	"size": {"w":2336,"h":32},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:49a20edb49571861d8a9a44d7c5d25c4:40a90231124ba26751be57b7560ee5f1:166ae5c8eca8b9ca631a74801028ced2$"
+	"smartupdate": "$TexturePacker:SmartUpdate:1072783326fc028f4f62638afa115d22:0e5cbc2a39d5fef00fe2c27f1b2adfe8:166ae5c8eca8b9ca631a74801028ced2$"
 }
 }

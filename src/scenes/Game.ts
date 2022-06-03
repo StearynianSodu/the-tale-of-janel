@@ -48,7 +48,7 @@ export default class Game extends Phaser.Scene{
 
         this.load.image('tiles', 'assets/ForestTilesetNew.png');
         this.load.atlas('janel', 'assets/janel.png','assets/janel.json');
-        this.load.atlas('enemy','assets/enemyTmp.png','assets/enemyTmp.json');
+        this.load.atlas('enemy','assets/enemy.png','assets/enemy.json');
 
         this.load.image('star', 'assets/Star.png');
         //this.load.image('bg', 'assets/Background.png');
@@ -67,7 +67,7 @@ export default class Game extends Phaser.Scene{
     }
 
     create(d: { level: number }){
-
+        this.createEnemyAnims();
 
         this.scene.launch('ui');
 
@@ -186,7 +186,7 @@ export default class Game extends Phaser.Scene{
                     this.obstacles.add('spike',spike);
                     break;
                 case 'enemySpawn':
-                    const enemy = this.matter.add.sprite(x,y,'enemy').setFixedRotation();
+                    const enemy = this.matter.add.sprite(x,y,'enemy','walk1.png').setFixedRotation();
                     enemy.setFriction(0);
                     this.enemies.push(new EnemyController(enemy,this));
                     this.obstacles.add('enemy',enemy.body as MatterJS.BodyType);
@@ -194,6 +194,51 @@ export default class Game extends Phaser.Scene{
             } 
 
 
+        })
+    }
+
+    private createEnemyAnims(){
+        this.anims.create({
+            key: 'enemy-walk',
+            frameRate: 4,
+            frames: [
+                {
+                    key: 'enemy',
+                    frame: 'walk1.png'
+                },{
+                    key: 'enemy',
+                    frame: 'walk2.png'
+                },{
+                    key: 'enemy',
+                    frame: 'walk3.png'
+                },{
+                    key: 'enemy',
+                    frame: 'walk4.png'
+                }
+            ],
+            repeat:-1
+        })
+        this.anims.create({
+            key: 'enemy-attack',
+            frameRate: 4,
+            frames: [
+                {
+                    key: 'enemy',
+                    frame: 'attack1.png'
+                },{
+                    key: 'enemy',
+                    frame: 'attack2.png'
+                },{
+                    key: 'enemy',
+                    frame: 'attack3.png'
+                },{
+                    key: 'enemy',
+                    frame: 'attack4.png'
+                },{
+                    key: 'enemy',
+                    frame: 'attack5.png'
+                }
+            ]
         })
     }
 }

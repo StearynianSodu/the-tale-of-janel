@@ -27,6 +27,7 @@ export default class PlayerController{
     private starsCollected;
     private enemies;
     private level;
+    private damage;
 
     private lastEnemy?: Phaser.Physics.Matter.Sprite;
 
@@ -408,7 +409,7 @@ export default class PlayerController{
         })
         .addState('enemy-damaged',{
             onEnter:()=>{
-                events.emit('enemy-damaged',this.lastEnemy);
+                events.emit('enemy-damaged',this.lastEnemy,this.damage);
             },
             onUpdate: ()=>{
                 if(this.sprite.body.velocity.y>0.1){
@@ -466,8 +467,8 @@ export default class PlayerController{
             if(this.obstacles.is('enemy',bodyB)){
                 this.lastEnemy = bodyB.gameObject;
                 if(this.stateMachine.isCurrentState('dash')||this.stateMachine.isCurrentState('smash')){
+                    this.damage = 1;
                     this.stateMachine.setState('enemy-damaged');
-                    
                     return;
                 }
                 this.stateMachine.setState('enemy-hit');
@@ -537,7 +538,9 @@ export default class PlayerController{
     private CheckWin(){
         console.log(this.starsCollected+" "+this.enemies);
         if(this.starsCollected===5 && this.enemies===0){
-            this.scene.scene.start('level-completed',{level: `${this.level}`});
+            this.scene.time.delayedCall(1000,()=>{
+                this.scene.scene.start('level-completed',{level: `${this.level}`});
+            })
         }
     }
 
@@ -649,10 +652,15 @@ export default class PlayerController{
 
         this.sprite.anims.create({
             key: 'player-dash',
-            frames: [{
-                key: 'janel',
-                frame: 'janel.png'
-            }],
+            frames: [
+                {
+                    key: 'janel',
+                    frame: 'dash1.png'
+                },{
+                    key: 'janel',
+                    frame: 'dash2.png'
+                }
+            ],
             repeat: -1
         })
 
@@ -729,37 +737,19 @@ export default class PlayerController{
             frames:[
                 {
                     key: 'janel',
-                    frame: 'beam1.png'
+                    frame: 'shoot1.png'
                 },{
                     key: 'janel',
-                    frame: 'beam2.png'
+                    frame: 'shoot2.png'
                 },{
                     key: 'janel',
-                    frame: 'beam3.png'
+                    frame: 'shoot3.png'
                 },{
                     key: 'janel',
-                    frame: 'beam4.png'
+                    frame: 'shoot4.png'
                 },{
                     key: 'janel',
-                    frame: 'beam5.png'
-                },{
-                    key: 'janel',
-                    frame: 'beam6.png'
-                },{
-                    key: 'janel',
-                    frame: 'beam7.png'
-                },{
-                    key: 'janel',
-                    frame: 'beam8.png'
-                },{
-                    key: 'janel',
-                    frame: 'beam9.png'
-                },{
-                    key: 'janel',
-                    frame: 'beam10.png'
-                },{
-                    key: 'janel',
-                    frame: 'beam11.png'
+                    frame: 'shoot5.png'
                 }
             ],
             repeat: 0
@@ -771,7 +761,16 @@ export default class PlayerController{
             frames:[
                 {
                     key:'janel',
-                    frame:'idle1.png'
+                    frame:'death1.png'
+                },{
+                    key:'janel',
+                    frame:'death2.png'
+                },{
+                    key:'janel',
+                    frame:'death3.png'
+                },{
+                    key:'janel',
+                    frame:'death4.png'
                 }
             ],
             repeat: 0
