@@ -139,6 +139,7 @@ export default class EnemyController{
     }
 
     update(dt: number){
-        this.stateMachine.update(dt);
+        if(!this.stateMachine.isCurrentState('dead'))
+            this.stateMachine.update(dt);
     }
 }
