@@ -52,8 +52,8 @@ export default class Game extends Phaser.Scene{
 
         this.load.image('star', 'assets/Star.png');
         //this.load.image('bg', 'assets/Background.png');
-        this.load.image('cheese','assets/Cheese.png');
-        this.load.image('butter','assets/Butter.png');
+        this.load.image('cheese','assets/cheese.png');
+        this.load.image('butter','assets/butter.png');
 
         this.load.audio('hurt1','assets/Hurt1.mp3');
         this.load.audio('hurt2','assets/Hurt2.mp3');
