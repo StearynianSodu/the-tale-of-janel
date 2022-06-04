@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="24" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="47">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="24" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="48">
  <editorsettings>
   <export target="level3.json" format="json"/>
  </editorsettings>
@@ -497,11 +497,10 @@
   <object id="7" name="spike" x="352.716" y="513.124" width="60.1531" height="61.0645"/>
   <object id="8" name="spike" x="192.308" y="641.633" width="28.2537" height="61.0645"/>
   <object id="10" name="spike" x="384.615" y="674.444" width="28.2537" height="29.1651"/>
-  <object id="14" name="enemySpawn" x="143.091" y="678.089"/>
   <object id="15" name="enemySpawn" x="460.262" y="679.001"/>
   <object id="17" name="butter" x="112.103" y="237.878"/>
   <object id="18" name="cheese" x="111.192" y="209.624"/>
-  <object id="19" x="270.689" y="298.943"/>
+  <object id="19" name="butter" x="270.689" y="298.943"/>
   <object id="20" name="cheese" x="216.004" y="112.103"/>
   <object id="21" name="cheese" x="237.878" y="82.9383"/>
   <object id="22" name="butter" x="266.132" y="113.926"/>
@@ -526,5 +525,6 @@
   <object id="44" name="butter" x="507.656" y="627.05"/>
   <object id="45" name="butter" x="520.415" y="607.911"/>
   <object id="46" name="cheese" x="541.378" y="626.139"/>
+  <object id="47" name="enemySpawn" x="617.025" y="632.519"/>
  </objectgroup>
 </map>

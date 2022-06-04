@@ -2,7 +2,7 @@ import StateMachine from "../stateMachine/StateMachine";
 import { sharedInstance as events } from "./EventCentre";
 
 export default class EnemyController{
-    private sprite: Phaser.Physics.Matter.Sprite;
+    private sprite?: Phaser.Physics.Matter.Sprite;
     private stateMachine: StateMachine;
     private moveTime: number;
     private scene: Phaser.Scene;
@@ -20,82 +20,95 @@ export default class EnemyController{
         this.stateMachine
         .addState('move-left',{
             onEnter: ()=>{
-                this.sprite.play('enemy-walk');
-                this.sprite.setVelocityX(-2);
-                this.sprite.flipX = false;
-                this.moveTime = 0;
+                if(this.sprite !== undefined && this.sprite.body !== undefined){
+                    this.sprite.setVelocityX(-2);
+                    this.sprite.play('enemy-walk');
+                    this.sprite.flipX = false;
+                    this.moveTime = 0;
+                } 
             },
             onUpdate: (dt: number)=>{
-                this.sprite.setVelocityX(-2);
-                this.moveTime += dt;
-
-                if(this.moveTime > 2000){
-                    this.nextState = 'move-right';
-                    this.stateMachine.setState('attack');
-                }
+                if(this.sprite !== undefined && this.sprite.body !== undefined){
+                    this.sprite.setVelocityX(-2);
+                    this.moveTime += dt;
+    
+                    if(this.moveTime > 2000){
+                        this.nextState = 'move-right';
+                        this.stateMachine.setState('attack');
+                    }
+ 
+                } 
             }
         })
         .addState('move-right',{
             onEnter: ()=>{
-                this.sprite.play('enemy-walk');
-                this.sprite.setVelocityX(2);
-                this.sprite.flipX = true;
-                this.moveTime = 0;
+                if(this.sprite !== undefined&& this.sprite.body !== undefined){
+                    this.sprite.setVelocityX(2);
+                    this.sprite.play('enemy-walk');
+                    this.sprite.flipX = true;
+                    this.moveTime = 0;
+                } 
             },
             onUpdate: (dt: number)=>{
-                this.sprite.setVelocityX(2);
-                this.moveTime += dt;
-
-                if(this.moveTime > 2000){
-                    this.nextState = 'move-left';
-                    this.stateMachine.setState('attack');
-                }
+                if(this.sprite !== undefined&& this.sprite.body !== undefined){
+                    this.sprite.setVelocityX(2);
+                    this.moveTime += dt;
+    
+                    if(this.moveTime > 2000){
+                        this.nextState = 'move-left';
+                        this.stateMachine.setState('attack');
+                    }
+                } 
             }
         })
         .addState('dead',{
             onEnter: ()=>{
                 events.emit('enemy-dead');
-                this.scene.tweens.add({
-                    targets: this.sprite,
-                    displayHeight: 0,
-                    y: this.sprite.y + (this.sprite.displayHeight * 0,5),
-                    duration: 200,
-                    onComplete:()=>{
-                        this.sprite.stop();
-                        this.sprite.destroy();
-                    }
-                })
+                if(this.sprite !== undefined&& this.sprite.body !== undefined)
+                    this.scene.tweens.add({
+                        targets: this.sprite,
+                        displayHeight: 0,
+                        y: this.sprite.y + (this.sprite.displayHeight * 0,5),
+                        duration: 200,
+                        onComplete:()=>{
+                            this.sprite.stop();
+                            this.sprite.destroy();
+                        }
+                    })
             }
         })
         .addState('damaged',{
             onEnter: ()=>{
-                const startColor = Phaser.Display.Color.ValueToColor(0xffffff);
-                const endColor = Phaser.Display.Color.ValueToColor(0xff0000);
-                this.scene.tweens.addCounter({
-                    from: 0,
-                    to: 100,
-                    duration: 100,
-                    repeat: 2,
-                    yoyo: true,
-                    ease: Phaser.Math.Easing.Sine.InOut,
-                    onUpdate: tween =>{
-                        const value = tween.getValue()
-                        const colorObject = Phaser.Display.Color.Interpolate.ColorWithColor(
-                            startColor,
-                            endColor,
-                            100,
-                            value
-                        );
+                if(this.sprite !== undefined&& this.sprite.body !== undefined){
 
-                        const color = Phaser.Display.Color.GetColor(
-                            colorObject.r,
-                            colorObject.g,
-                            colorObject.b
-                        )
-
-                        this.sprite.setTint(color);
-                    }
-                })
+                    const startColor = Phaser.Display.Color.ValueToColor(0xffffff);
+                    const endColor = Phaser.Display.Color.ValueToColor(0xff0000);
+                    this.scene.tweens.addCounter({
+                        from: 0,
+                        to: 100,
+                        duration: 100,
+                        repeat: 2,
+                        yoyo: true,
+                        ease: Phaser.Math.Easing.Sine.InOut,
+                        onUpdate: tween =>{
+                            const value = tween.getValue()
+                            const colorObject = Phaser.Display.Color.Interpolate.ColorWithColor(
+                                startColor,
+                                endColor,
+                                100,
+                                value
+                            );
+    
+                            const color = Phaser.Display.Color.GetColor(
+                                colorObject.r,
+                                colorObject.g,
+                                colorObject.b
+                            )
+    
+                            this.sprite.setTint(color);
+                        }
+                    })
+                }
             },
             onUpdate: ()=>{
                 this.stateMachine.setState('move-left');
@@ -104,7 +117,7 @@ export default class EnemyController{
         .addState('attack',{
             onEnter: ()=>{
                 this.sprite.play('enemy-attack');
-                this.sprite.setVelocityX(0);
+                if(this.sprite !== undefined && this.sprite.body !== undefined) this.sprite.setVelocityX(0);
             },
             onUpdate: ()=>{
                 this.scene.time.delayedCall(1000,()=>{
@@ -139,7 +152,7 @@ export default class EnemyController{
     }
 
     update(dt: number){
-        if(!this.stateMachine.isCurrentState('dead'))
+        if(!this.stateMachine.isCurrentState('dead') || this.sprite !== undefined)
             this.stateMachine.update(dt);
     }
 }

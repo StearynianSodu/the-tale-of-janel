@@ -115,7 +115,8 @@ export default class Game extends Phaser.Scene{
         this.playerController?.update(dt); 
         
         this.enemies.forEach(enemy => {
-            enemy.update(dt);
+            if(enemy != undefined)
+                enemy.update(dt); 
         });
     }
 
@@ -146,10 +147,12 @@ export default class Game extends Phaser.Scene{
     }
 
     private createStar(x:number, y:number){
-        const star = this.matter.add.sprite(x,y,'star',undefined, {
+        const star =this.matter.add.sprite(x,y,'star',undefined, {
             isStatic: true,
             isSensor: true
         }).setData({type:'star'});
+
+        console.log(star); 
 
     }
 

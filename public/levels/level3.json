@@ -132,17 +132,6 @@
                 }, 
                 {
                  "height":0,
-                 "id":14,
-                 "name":"enemySpawn",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":143.091,
-                 "y":678.089
-                }, 
-                {
-                 "height":0,
                  "id":15,
                  "name":"enemySpawn",
                  "rotation":0,
@@ -177,7 +166,7 @@
                 {
                  "height":0,
                  "id":19,
-                 "name":"",
+                 "name":"butter",
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -448,6 +437,17 @@
                  "width":0,
                  "x":541.378,
                  "y":626.139
+                }, 
+                {
+                 "height":0,
+                 "id":47,
+                 "name":"enemySpawn",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":617.024862042366,
+                 "y":632.518839375779
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -456,7 +456,7 @@
          "y":0
         }],
  "nextlayerid":4,
- "nextobjectid":47,
+ "nextobjectid":48,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.7.2",

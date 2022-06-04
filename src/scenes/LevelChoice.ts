@@ -4,7 +4,7 @@ import WebFontFile from "./WebFontFile";
 
 export default class LevelChoice extends Phaser.Scene{
     private keys;
-    private levelCount = 3;
+    private levelCount = 5;
     private currentLevel;
     private levelLabel;
     constructor(){
