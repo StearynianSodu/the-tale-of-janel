@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="24" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="8">
+ <editorsettings>
+  <export target="level01.json" format="json"/>
+ </editorsettings>
+ <tileset firstgid="1" name="ForestTileset001" tilewidth="32" tileheight="32" tilecount="32" columns="8">
+  <image source="../assets/ForestTileset001.png" width="256" height="128"/>
+  <tile id="0">
+   <properties>
+    <property name="collides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="collides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="collides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="collides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="collides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="collides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="collides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="collides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="collides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="9">
+   <properties>
+    <property name="collides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="10">
+   <properties>
+    <property name="collides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="11">
+   <properties>
+    <property name="collides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="12">
+   <properties>
+    <property name="collides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="13">
+   <properties>
+    <property name="collides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="14">
+   <properties>
+    <property name="collides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="15">
+   <properties>
+    <property name="collides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="16">
+   <properties>
+    <property name="collides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="17">
+   <properties>
+    <property name="collides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="18">
+   <properties>
+    <property name="collides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="19">
+   <properties>
+    <property name="collides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="20">
+   <properties>
+    <property name="collides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="21">
+   <properties>
+    <property name="collides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="22">
+   <properties>
+    <property name="collides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="23">
+   <properties>
+    <property name="collides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="24">
+   <properties>
+    <property name="collides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="25">
+   <properties>
+    <property name="collides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="26">
+   <properties>
+    <property name="collides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="27">
+   <properties>
+    <property name="collides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="28">
+   <properties>
+    <property name="collides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="29">
+   <properties>
+    <property name="collides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="30">
+   <properties>
+    <property name="collides" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="31">
+   <properties>
+    <property name="collides" type="bool" value="true"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer id="1" name="ground" width="24" height="24">
+  <data encoding="csv">
+10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,
+10,10,10,10,10,10,10,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,10,10,
+10,10,10,10,10,18,19,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,10,
+10,10,10,10,19,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,10,
+10,10,10,19,0,0,0,0,0,0,0,0,0,0,0,25,26,3,0,0,0,0,10,10,
+10,10,11,0,0,0,0,0,0,28,0,0,0,0,0,0,0,29,2,2,3,0,10,10,
+10,10,13,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,17,18,13,2,10,10,
+10,10,10,13,26,27,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,10,10,10,
+10,10,10,19,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,17,10,10,10,
+10,10,19,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,17,10,10,
+10,11,0,0,0,0,0,25,2,2,2,27,0,0,0,0,0,0,0,0,0,0,9,10,
+10,11,0,0,0,0,0,0,17,18,19,0,0,0,0,0,0,0,0,0,0,0,9,10,
+10,13,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,10,
+10,10,13,2,2,27,0,0,0,0,0,0,0,0,0,25,2,2,2,2,2,2,14,10,
+10,10,10,10,11,0,0,0,0,0,0,0,0,0,0,0,17,10,10,10,10,10,10,10,
+10,10,10,10,11,0,0,0,0,0,0,25,27,0,0,0,0,9,10,10,10,10,10,10,
+10,10,10,10,13,2,3,0,0,0,0,0,0,0,0,0,0,9,5,18,18,18,6,10,
+10,10,10,10,10,10,13,2,2,3,0,0,0,0,0,0,0,17,19,0,0,0,9,10,
+10,10,10,10,10,10,10,10,10,11,0,0,0,0,0,0,0,0,0,0,0,0,9,10,
+10,10,10,10,10,10,10,10,10,13,3,0,0,0,0,0,0,0,0,0,0,0,9,10,
+10,10,10,10,10,10,10,10,10,10,11,0,0,0,0,0,0,0,0,0,0,1,14,10,
+10,10,10,10,10,10,10,10,10,10,13,2,2,3,0,0,0,1,2,2,2,14,10,10,
+10,10,10,10,10,10,10,10,10,10,10,10,10,13,2,2,2,14,10,10,10,10,10,10,
+10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10
+</data>
+ </layer>
+ <objectgroup id="2" name="objects">
+  <object id="2" name="star" x="653.712" y="112.678"/>
+  <object id="3" name="star" x="303.158" y="111.784"/>
+  <object id="4" name="star" x="654.606" y="592.007"/>
+  <object id="5" name="star" x="591.113" y="335.352"/>
+  <object id="7" name="playerSpawn" x="143.083" y="367.545"/>
+ </objectgroup>
+</map>
