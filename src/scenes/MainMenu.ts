@@ -1,5 +1,7 @@
 import Phaser from "phaser";
 
+import WebFontFile from "./WebFontFile";
+
 
 export default class MainMenu extends Phaser.Scene{
     private keys;
@@ -21,9 +23,20 @@ export default class MainMenu extends Phaser.Scene{
         });
     }
 
+    preload(){
+        const fonts = new WebFontFile(this.load, 'Homemade Apple');
+        this.load.addFile(fonts);
+    }
+
+
     create(){
-        this.add.text(400,400,"Press Space to Start",{
-            fontSize:'32px'
+        this.add.text(400,380,"Pan Janel",{
+            fontSize:'96px',
+            fontFamily: 'Homemade Apple'
+        }).setOrigin(0.5,0.5);
+
+        this.add.text(400,460,"Press space to start",{
+            fontSize:'24px'
         }).setOrigin(0.5,0.5);
     }
 

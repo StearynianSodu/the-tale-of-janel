@@ -1,5 +1,7 @@
 import Phaser from "phaser";
 import { sharedInstance as events } from "./EventCentre";
+import WebFontFile from "./WebFontFile";
+
 
 export default class UI extends Phaser.Scene{
     private starsLabel!: Phaser.GameObjects.Text;
@@ -31,6 +33,8 @@ export default class UI extends Phaser.Scene{
 
     preload(){
         this.load.image('ui-bg','assets/UIBackground.png');
+        const fonts = new WebFontFile(this.load, 'Homemade Apple');
+        this.load.addFile(fonts);
     }
 
     create(){
@@ -38,7 +42,7 @@ export default class UI extends Phaser.Scene{
         this.graphics = this.add.graphics();
 
         this.starsLabel = this.add.text(64,870, `Stars: ${this.starsCount}`,{
-            fontSize: '16px'
+            fontSize: '32px'
         }).setDepth(3);
 
         this.setButterBar(0);
@@ -62,9 +66,10 @@ export default class UI extends Phaser.Scene{
         this.veil.fillRect(0,0,768,960);
         this.veil.setScrollFactor(0);
 
-        this.pauseTxt = this.add.text(64,64,'Paused',{
-            fontSize: '64px'
-        });
+        this.pauseTxt = this.add.text(768/2,768/2,'Paused',{
+            fontSize: '96px',
+            fontFamily: 'Homemade Apple'
+        }).setOrigin(0.5,0.5);
 
         this.veil.setDepth(1);
         this.pauseTxt.setDepth(1);
